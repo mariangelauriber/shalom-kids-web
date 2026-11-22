@@ -16,7 +16,7 @@ export default defineConfig({
   },
   ssgOptions: {
     entry: 'src/main.tsx',
-    script: 'async',
+    script: 'defer',
     dirStyle: 'nested',
     formatting: 'none',
     onPageRendered(_ruta, html) {
