@@ -1,0 +1,363 @@
+/* Fuentes (H10, 22 nov 2026): solo los subconjuntos que usa la web. El texto es español (latin);
+   el hebreo de Fredoka solo se descarga donde aparece (שָׁלוֹם en /nosotros/), gracias a unicode-range.
+   Sin cursiva propia de Nunito: el navegador la sintetiza en el lema del pie. */
+@font-face {
+  font-family: 'Fredoka Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 700;
+  src: url('../../node_modules/@fontsource-variable/fredoka/files/fredoka-hebrew-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+}
+
+@font-face {
+  font-family: 'Fredoka Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 700;
+  src: url('../../node_modules/@fontsource-variable/fredoka/files/fredoka-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Nunito Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 1000;
+  src: url('../../node_modules/@fontsource-variable/nunito/files/nunito-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* Marca (propuesta de manual v3): el verde lima se retiró de las piezas */
+  --naranja: #f8803c;
+  --turquesa: #2aa1b7;
+  --morado: #a96eff;
+  /* Resaltador: subrayados, estrellas, etiquetas cortas */
+  --mostaza: #edb24a;
+
+  /* Fuentes (manual v3): títulos en Fredoka; textos y botones en Nunito */
+  --f-display: 'Fredoka Variable', 'Fredoka', 'Arial Rounded MT Bold', system-ui, sans-serif;
+  --f-texto: 'Nunito Variable', 'Nunito', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+
+  /* Variantes para texto legible (contraste AA) */
+  --turquesa-osc: #1b7a8c;
+  --turquesa-noche: #145e6c;
+  --naranja-osc: #b5521a;
+  /* H11: tonos solo para texto. Mostaza clara sobre turquesa noche y naranja texto sobre durazno (≥ 4,5:1) */
+  --mostaza-clara: #f7cf80;
+  --naranja-texto: #9e4614;
+  --morado-osc: #6b3fc4;
+
+  --tinta: #1d2340;
+  --tinta-suave: #4a5068;
+  --papel: #ffffff;
+  --crema: #fff7ef;
+  --menta: #eaf6f8;
+  --lila: #f4edff;
+  --borde: #ebe3d9;
+
+  /* Fondos de sección: tintes que sí se distinguen del blanco.
+     Regla: nunca dos secciones seguidas con el mismo fondo */
+  --fondo-menta: #dff1f4;
+  --fondo-durazno: #ffeadb;
+  --fondo-lila: #efe4ff;
+
+  --radio: 22px;
+  --radio-sm: 14px;
+  --sombra: 0 1px 2px rgb(29 35 64 / 0.06), 0 8px 24px rgb(29 35 64 / 0.08);
+
+  --cabecera: 72px;
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--f-texto);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--tinta);
+  background: var(--papel);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: var(--f-display);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+
+h1,
+h2 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.06;
+}
+
+/* Palabra clave del título: color + trazo de marcador (Fredoka no tiene cursiva) */
+h1 em,
+h2 em {
+  font-style: normal;
+  color: var(--em-titulo, var(--naranja-osc));
+  padding-inline: 0.06em;
+  background: linear-gradient(var(--em-marca, rgb(237 178 74 / 0.45)), var(--em-marca, rgb(237 178 74 / 0.45))) no-repeat
+    0 92% / 100% 0.3em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--turquesa-osc);
+  text-underline-offset: 3px;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--morado);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+[id] {
+  scroll-margin-top: calc(var(--cabecera) + 12px);
+}
+
+.contenedor {
+  width: min(1140px, 100% - 2.5rem);
+  margin-inline: auto;
+}
+
+/* Portada (manual v3): turquesa con el patrón de útiles. Detrás del texto va un
+   velo turquesa noche para que el blanco (≥ 7:1) y el mostaza (≥ 3:1) se lean */
+.fondo-portada {
+  position: relative;
+  color: #fff;
+  background-color: var(--turquesa-noche);
+  background-image:
+    linear-gradient(rgb(20 94 108 / 0.88), rgb(20 94 108 / 0.88)),
+    url('/img/patron-900.webp');
+  background-size:
+    auto,
+    900px auto;
+}
+
+@media (min-width: 880px) {
+  .fondo-portada {
+    background-image:
+      linear-gradient(90deg, rgb(20 94 108 / 0.94) 0%, rgb(20 94 108 / 0.9) 48%, rgb(27 122 140 / 0.72) 100%),
+      url('/img/patron-900.webp');
+  }
+}
+
+.fondo-portada h1 em {
+  --em-titulo: var(--mostaza);
+  --em-marca: transparent;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.saltar {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  background: var(--tinta);
+  color: #fff;
+  font-weight: 600;
+  transform: translateY(-200%);
+}
+
+.saltar:focus {
+  transform: none;
+}
+
+/* Botones (18 nov): planos, como los colegios referentes (San José, British, Americano).
+   Jerarquía: naranja = escribir por WhatsApp o pedir el formulario (conversión);
+   oscuro = las demás acciones; borde fino = secundaria; claro = sobre mapas o fotos.
+   Sin sombra dura de abajo: elevación suave y un hover que oscurece un poco. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  min-height: 48px;
+  padding: 0.7em 1.45em;
+  border: 1.5px solid transparent;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.2;
+  letter-spacing: 0.005em;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn svg {
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:focus-visible {
+  border-radius: 999px;
+}
+
+.btn:disabled,
+.btn[aria-disabled='true'] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Conversión: tinta sobre naranja (6:1) */
+.btn-primario {
+  background: var(--naranja);
+  color: var(--tinta);
+  box-shadow: 0 8px 18px -10px rgb(201 78 12 / 0.75);
+}
+
+.btn-primario:hover {
+  background: #f26f28;
+  box-shadow: 0 12px 24px -12px rgb(201 78 12 / 0.85);
+}
+
+/* Otras acciones y llamados sobre fondos de color (naranja, morado): blanco sobre tinta (15:1) */
+.btn-oscuro {
+  background: var(--tinta);
+  color: #fff;
+  box-shadow: 0 8px 18px -10px rgb(29 35 64 / 0.6);
+}
+
+.btn-oscuro:hover {
+  background: #2c345a;
+  box-shadow: 0 12px 24px -12px rgb(29 35 64 / 0.7);
+}
+
+.btn-claro {
+  background: var(--papel);
+  color: var(--tinta);
+  box-shadow: 0 6px 16px -8px rgb(29 35 64 / 0.35);
+}
+
+.btn-claro:hover {
+  background: var(--crema);
+}
+
+/* Secundaria: borde fino del color del texto; al pasar, un velo del mismo color */
+.btn-borde {
+  background: transparent;
+  color: currentColor;
+  border-color: color-mix(in srgb, currentColor 70%, transparent);
+}
+
+.btn-borde:hover {
+  border-color: currentColor;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+.btn-sm {
+  min-height: 44px;
+  padding: 0.5em 1.1em;
+  font-size: 0.9375rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+  .btn:hover {
+    transform: none;
+  }
+}
+
+/* Marca de dato pendiente: visible a propósito para revisión */
+.pendiente {
+  display: inline;
+  padding: 0.05em 0.4em;
+  border-radius: 6px;
+  border: 1.5px dashed #c2410c;
+  background: #fff1e6;
+  color: #9a3412;
+  font-size: 0.85em;
+  font-weight: 600;
+  letter-spacing: 0;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

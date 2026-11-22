@@ -1,0 +1,55 @@
+/* I-2: fondo blanco entre la portada (turquesa) y el método (durazno) */
+.seccion {
+  padding-block: clamp(3.5rem, 8vw, 5.5rem);
+}
+
+.dudas {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.duda {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+  padding: 1.5rem 1.4rem;
+  border-radius: var(--radio);
+  background: var(--crema);
+  border-top: 6px solid var(--c);
+}
+
+.duda h3 {
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+
+.duda p {
+  color: var(--tinta-suave);
+}
+
+.enlace {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: auto;
+  padding-top: 0.35rem;
+  color: var(--naranja-osc);
+  font-weight: 800;
+  text-underline-offset: 3px;
+}
+
+@media (min-width: 640px) {
+  .dudas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .dudas {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,163 @@
+/* Fondo turquesa con patrón: clase global .fondo-portada */
+.hero {
+  padding-block: clamp(2.5rem, 7vw, 5.5rem) clamp(3.5rem, 8vw, 6rem);
+  /* Recorta solo a los lados (burbujas del sello) */
+  overflow-x: clip;
+}
+
+@supports not (overflow-x: clip) {
+  .hero {
+    overflow: hidden;
+  }
+}
+
+.grid {
+  position: relative;
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.texto {
+  display: grid;
+  gap: 1.35rem;
+  justify-items: start;
+}
+
+.ante {
+  display: inline-flex;
+  flex-wrap: wrap;
+  column-gap: 0.4rem;
+  padding: 0.4rem 0.95rem;
+  border-radius: 1rem;
+  background: var(--mostaza);
+  color: var(--tinta);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+.titulo {
+  font-size: clamp(2.05rem, 7.4vw, 3.5rem);
+  line-height: 1.06;
+  max-width: 19ch;
+  text-shadow: 0 2px 18px rgb(8 40 48 / 0.35);
+}
+
+.bajada {
+  font-size: clamp(1.05rem, 2.6vw, 1.25rem);
+  max-width: 34rem;
+}
+
+.etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.etiquetas li {
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: var(--papel);
+  color: var(--tinta);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.etiquetas li:nth-child(1) {
+  box-shadow: inset 0 -3px 0 var(--naranja);
+}
+.etiquetas li:nth-child(2) {
+  box-shadow: inset 0 -3px 0 var(--morado);
+}
+.etiquetas li:nth-child(3) {
+  box-shadow: inset 0 -3px 0 var(--turquesa);
+}
+.etiquetas li:nth-child(4) {
+  box-shadow: inset 0 -3px 0 var(--mostaza);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.sello {
+  position: relative;
+  justify-self: center;
+  width: min(62vw, 240px);
+}
+
+.sello img {
+  width: 100%;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 8px rgb(255 255 255 / 0.12),
+    0 18px 40px rgb(8 40 48 / 0.45);
+  animation: flotar 7s ease-in-out infinite;
+}
+
+.burbuja {
+  display: none;
+}
+
+@keyframes flotar {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-1deg);
+  }
+}
+
+@media (min-width: 880px) {
+  .grid {
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 3rem;
+  }
+  .sello {
+    width: min(100%, 400px);
+  }
+  .burbuja {
+    position: absolute;
+    display: block;
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    color: var(--tinta);
+    font-weight: 700;
+    font-size: 0.95rem;
+    box-shadow: 0 6px 16px rgb(8 40 48 / 0.3);
+  }
+  .b1 {
+    top: 4%;
+    left: -6%;
+    background: var(--mostaza);
+    transform: rotate(-8deg);
+  }
+  .b2 {
+    top: 48%;
+    right: -10%;
+    background: var(--naranja);
+    transform: rotate(6deg);
+  }
+  .b3 {
+    bottom: 2%;
+    left: 4%;
+    background: var(--morado);
+    transform: rotate(-4deg);
+  }
+}
+
+/* Línea de apoyo del llamado (storytelling, 22 nov 2026): blanco sobre el velo turquesa noche (≥ 7:1) */
+.apoyo {
+  margin-top: -0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+}

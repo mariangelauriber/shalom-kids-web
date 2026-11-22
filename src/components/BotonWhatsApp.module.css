@@ -1,0 +1,60 @@
+/* Botón redondo con solo el logo, como el de la app: verde de WhatsApp (#25D366) y logo blanco.
+   El nombre accesible va en aria-label. */
+.boton {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right, 0px));
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 10px 24px -6px rgb(29 35 64 / 0.4);
+  transition:
+    transform 0.18s ease,
+    background-color 0.18s ease;
+  animation: entrar 0.5s 0.6s ease-out both;
+}
+
+.boton:hover {
+  background: #1ebe5b;
+  transform: translateY(-2px);
+}
+
+.boton:active {
+  transform: scale(0.96);
+}
+
+.boton:focus-visible {
+  border-radius: 50%;
+}
+
+.boton svg {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boton {
+    animation: none;
+    transition: none;
+  }
+  .boton:hover {
+    transform: none;
+  }
+}

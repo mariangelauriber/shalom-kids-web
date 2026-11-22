@@ -1,0 +1,158 @@
+.pie {
+  padding-block: 3rem calc(6.5rem + env(safe-area-inset-bottom, 0px));
+  background: var(--tinta);
+  color: #d9dcea;
+  font-size: 1rem;
+}
+
+.grid {
+  display: grid;
+  gap: 2.25rem;
+}
+
+.marca {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.marca img {
+  width: 84px;
+  height: 84px;
+  flex: none;
+}
+
+.marca > div {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.nombre {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.lema {
+  font-style: italic;
+  color: var(--mostaza);
+}
+
+/* Íconos de redes */
+.redes {
+  display: flex;
+  gap: 0.6rem;
+  margin: 0.6rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.red {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.1);
+  color: #fff;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.red svg {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.red:hover {
+  transform: translateY(-2px);
+}
+
+.wa:hover {
+  background: #25d366;
+}
+
+.ig:hover {
+  background: #d62976;
+}
+
+.fb:hover {
+  background: #1877f2;
+}
+
+/* Columnas de secciones y contacto */
+.columna ul {
+  display: grid;
+  gap: 0.1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tituloCol {
+  margin-bottom: 0.5rem;
+  color: var(--mostaza);
+  font-family: var(--f-texto);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.columna a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  min-width: 44px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.columna a:hover {
+  text-decoration: underline;
+}
+
+.direccion {
+  padding-top: 0.5rem;
+  color: #d9dcea;
+}
+
+.base {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  justify-content: space-between;
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgb(255 255 255 / 0.12);
+  font-size: 0.85rem;
+  color: #aab0c8;
+}
+
+.base a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: #d9dcea;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .red {
+    transition: none;
+  }
+  .red:hover {
+    transform: none;
+  }
+}
+
+@media (min-width: 820px) {
+  .grid {
+    grid-template-columns: 1.7fr 1fr 1fr;
+    gap: 3rem;
+  }
+  /* H23: espacio para que el botón flotante de WhatsApp no tape «Aviso de privacidad» */
+  .pie {
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}

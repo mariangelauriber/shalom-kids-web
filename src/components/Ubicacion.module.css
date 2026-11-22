@@ -1,0 +1,113 @@
+.seccion {
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+  background: var(--fondo-durazno);
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+.texto {
+  display: grid;
+  gap: 1.25rem;
+  justify-items: start;
+}
+
+.texto header {
+  margin-bottom: 0;
+}
+
+.direccion {
+  display: flex;
+  gap: 0.75rem;
+  font-style: normal;
+  font-size: 1.05rem;
+}
+
+.direccion svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  margin-top: 0.15rem;
+  color: var(--naranja-osc);
+}
+
+.horario {
+  display: grid;
+  gap: 0.15rem;
+  padding-left: 2.25rem;
+  font-size: 0.95rem;
+  color: var(--tinta-suave);
+}
+
+.horario strong {
+  color: var(--tinta);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.acciones :global(.btn-borde) {
+  color: var(--tinta);
+}
+
+.fachada,
+.iframe {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 0;
+  border-radius: var(--radio);
+}
+
+/* Ilustración de calles (no es un mapa real) */
+.fachada {
+  position: relative;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  overflow: hidden;
+  background-color: #dff1f4;
+  background-image:
+    linear-gradient(90deg, transparent 47%, #fff 47% 53%, transparent 53%),
+    linear-gradient(0deg, transparent 47%, #fff 47% 53%, transparent 53%),
+    linear-gradient(32deg, transparent 48.5%, #fff 48.5% 51.5%, transparent 51.5%),
+    linear-gradient(90deg, transparent 18%, rgb(255 255 255 / 0.7) 18% 20%, transparent 20% 80%, rgb(255 255 255 / 0.7) 80% 82%, transparent 82%),
+    linear-gradient(0deg, transparent 22%, rgb(255 255 255 / 0.7) 22% 24%, transparent 24% 76%, rgb(255 255 255 / 0.7) 76% 78%, transparent 78%);
+  box-shadow: inset 0 0 0 2px rgb(42 161 183 / 0.25);
+}
+
+.pin {
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: var(--naranja);
+  box-shadow: 0 10px 20px rgb(29 35 64 / 0.2);
+}
+
+.pin svg {
+  width: 1.9rem;
+  height: 1.9rem;
+  transform: rotate(45deg);
+  color: var(--tinta);
+}
+
+.sinMapa {
+  text-align: center;
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1.1fr;
+    gap: 4rem;
+  }
+}

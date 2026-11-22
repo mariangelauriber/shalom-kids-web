@@ -1,0 +1,48 @@
+.doc {
+  max-width: 46rem;
+  padding-block: 2.5rem 4rem;
+}
+
+.doc h1 {
+  font-size: clamp(1.7rem, 5vw, 2.4rem);
+  margin-bottom: 0.75rem;
+}
+
+.doc h2 {
+  font-family: inherit;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  font-size: 1.2rem;
+  margin: 2rem 0 0.6rem;
+  color: var(--turquesa-noche);
+}
+
+.doc p,
+.doc ul {
+  margin: 0 0 0.85rem;
+  color: var(--tinta-suave);
+}
+
+.doc ul {
+  padding-left: 1.25rem;
+}
+
+.doc li {
+  margin-bottom: 0.35rem;
+}
+
+.doc strong {
+  color: var(--tinta);
+}
+
+.volver {
+  font-size: 0.95rem;
+}
+
+.nota {
+  margin-bottom: 1.5rem;
+}
+
+.doc :global(.btn-borde) {
+  color: var(--tinta);
+}

@@ -1,0 +1,371 @@
+/* Portada: ficha de diccionario con la palabra «shalom» */
+.ficha {
+  justify-self: center;
+  display: grid;
+  gap: 0.35rem;
+  width: min(100%, 340px);
+  padding: 1.6rem 1.75rem 1.5rem;
+  border-radius: var(--radio);
+  background: var(--papel);
+  color: var(--tinta);
+  box-shadow: 0 18px 40px rgb(8 40 48 / 0.3);
+  transform: rotate(2deg);
+}
+
+.hebreo {
+  font-family: var(--f-display);
+  font-size: clamp(3.2rem, 12vw, 4.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--turquesa-osc);
+  text-align: right;
+}
+
+.termino {
+  font-family: var(--f-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  border-bottom: 2px dashed var(--borde);
+  padding-bottom: 0.5rem;
+}
+
+.termino span {
+  font-family: var(--f-texto);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--tinta-suave);
+}
+
+.acepciones {
+  margin: 0.25rem 0 0;
+  padding-left: 1.4rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.acepciones li::marker {
+  color: var(--naranja-osc);
+  font-weight: 800;
+}
+
+/* Secciones */
+.seccion {
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+}
+
+.fondoMenta {
+  background: var(--fondo-menta);
+}
+
+.fondoDurazno {
+  background: var(--fondo-durazno);
+}
+
+/* Historia */
+.historia {
+  display: grid;
+  gap: 2rem;
+}
+
+.texto {
+  display: grid;
+  gap: 1rem;
+  max-width: 40rem;
+  font-size: 1.1rem;
+}
+
+.lema {
+  padding: 1rem 1.2rem;
+  border-radius: var(--radio-sm);
+  background: var(--crema);
+  border-left: 5px solid var(--mostaza);
+  font-size: 1rem;
+}
+
+.lema a {
+  color: var(--naranja-osc);
+  font-weight: 800;
+}
+
+.hitos {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  align-content: start;
+}
+
+.hitos li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  border-radius: var(--radio-sm);
+  background: var(--papel);
+  box-shadow: var(--sombra);
+  border-left: 5px solid var(--c);
+}
+
+.anio {
+  font-family: var(--f-display);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--tinta);
+}
+
+.hitos p {
+  color: var(--tinta-suave);
+}
+
+/* Misión y visión */
+.rumbo {
+  display: grid;
+  gap: 1rem;
+}
+
+.tarjeta {
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+  padding: 1.75rem 1.6rem;
+  border-radius: var(--radio);
+  background: var(--papel);
+  box-shadow: var(--sombra);
+  border-top: 6px solid var(--turquesa);
+  font-size: 1.08rem;
+}
+
+.tarjeta h3 {
+  font-size: 1.5rem;
+}
+
+.vision {
+  border-top-color: var(--naranja);
+}
+
+/* Valores */
+.valores {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.valores > li {
+  display: grid;
+  gap: 0.85rem;
+  align-content: start;
+  padding: 1.5rem;
+  border-radius: var(--radio);
+  background: var(--papel);
+  box-shadow: var(--sombra);
+}
+
+.valores h3 {
+  justify-self: start;
+  padding: 0.3rem 1rem;
+  border-radius: 999px;
+  background: var(--c);
+  color: var(--tinta);
+  font-size: 1.35rem;
+}
+
+.valores ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.valores ul li {
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: var(--crema);
+  box-shadow: inset 0 0 0 1.5px var(--borde);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+/* Promesa de cada valor (copy del 18 nov) */
+.valorLema {
+  font-family: var(--f-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--tinta);
+}
+
+.valorTexto {
+  color: var(--tinta-suave);
+  font-size: 1rem;
+}
+
+.valores ul {
+  margin-top: auto;
+}
+
+.valoresCierre {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem 1.25rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.valoresCierre p {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* N-5 · Cada niño, único (22 nov 2026) */
+.fondoLila {
+  background: var(--fondo-lila);
+}
+
+.unico {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+.unicoTexto {
+  max-width: 40rem;
+  font-size: 1.1rem;
+}
+
+.enlaceFuerte {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 0.75rem;
+  color: var(--morado-osc);
+  font-weight: 800;
+  text-underline-offset: 3px;
+}
+
+.cita {
+  margin: 0;
+  padding: 1.75rem 1.6rem;
+  border-radius: var(--radio);
+  background: var(--papel);
+  box-shadow: var(--sombra);
+  border-left: 6px solid var(--morado);
+}
+
+.cita p {
+  font-family: var(--f-display);
+  font-size: clamp(1.35rem, 3.5vw, 1.7rem);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.cita cite {
+  display: block;
+  margin-top: 0.6rem;
+  color: var(--tinta-suave);
+  font-style: normal;
+  font-weight: 700;
+}
+
+@media (min-width: 880px) {
+  .unico {
+    grid-template-columns: 1.3fr 1fr;
+    gap: 3.5rem;
+  }
+}
+
+/* Datos del colegio */
+.datos {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  border-radius: var(--radio);
+  background: var(--papel);
+  box-shadow: inset 0 0 0 1.5px var(--borde);
+  overflow: hidden;
+}
+
+.datos > div {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.9rem 1.25rem;
+}
+
+.datos > div + div {
+  border-top: 1.5px solid var(--borde);
+}
+
+.datos dt {
+  color: var(--tinta-suave);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.datos dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.datos a {
+  color: inherit;
+  font-weight: 700;
+}
+
+/* Objetivo táctil de unos 44 px sin cambiar la altura de la línea */
+.datos dd a {
+  display: inline-block;
+  padding-block: 0.7rem;
+  margin-block: -0.7rem;
+}
+
+/* Fila Contacto: varios enlaces que pueden caer en líneas distintas; cajas propias, sin margen negativo */
+.datos .contacto {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.25rem;
+}
+
+.datos .contacto a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-block: 0;
+  margin-block: 0;
+}
+
+@media (min-width: 760px) {
+  .rumbo,
+  .valores {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .valores {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .datos > div {
+    grid-template-columns: 14rem 1fr;
+    align-items: baseline;
+  }
+}
+
+@media (min-width: 880px) {
+  .portadaGrid {
+    grid-template-columns: 1.3fr 1fr;
+  }
+}
+
+@media (min-width: 960px) {
+  .historia {
+    grid-template-columns: 1.4fr 1fr;
+    gap: 3.5rem;
+    align-items: end;
+  }
+}

@@ -1,0 +1,19 @@
+.compartir {
+  display: grid;
+  justify-items: start;
+  min-width: 0;
+}
+
+.estado {
+  font-size: 0.9rem;
+}
+
+.estado:not(:empty),
+.compartir input {
+  margin-top: 0.5rem;
+}
+
+.compartir input {
+  width: 100%;
+  font: inherit;
+}

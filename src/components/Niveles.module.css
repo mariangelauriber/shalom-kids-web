@@ -1,0 +1,286 @@
+.seccion {
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+  background: var(--fondo-menta);
+}
+
+.escalera {
+  display: grid;
+  gap: 2rem;
+}
+
+.grupoTitulo {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+  margin-bottom: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.grupoTitulo::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--borde) 0 8px, transparent 8px 14px);
+}
+
+.grados {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.grado {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 1rem;
+  row-gap: 0.15rem;
+  align-items: center;
+  padding: 1rem 1.15rem;
+  border-radius: var(--radio-sm);
+  background: var(--papel);
+  border-bottom: 5px solid var(--c);
+  box-shadow: var(--sombra);
+}
+
+.insignia {
+  grid-row: span 3;
+  display: grid;
+  place-items: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  background: var(--c);
+  color: var(--tinta);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.nombre {
+  font-size: 1.15rem;
+}
+
+.dato {
+  font-size: 1rem;
+  color: var(--tinta-suave);
+}
+
+.dato span {
+  font-weight: 600;
+  color: var(--tinta);
+}
+
+.fuente {
+  margin-top: 1rem;
+  font-size: 0.9375rem;
+  color: var(--tinta-suave);
+}
+
+.jornadas {
+  display: grid;
+  gap: 1rem;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jornada {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.25rem 1.35rem;
+  border-radius: var(--radio-sm);
+  background: var(--papel);
+  border: 2px dashed var(--borde);
+}
+
+.jornada h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.15rem;
+}
+
+.jornada p {
+  font-size: 1rem;
+  color: var(--tinta-suave);
+}
+
+.jIcono {
+  display: grid;
+  place-items: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  flex: none;
+  border-radius: 50%;
+  background: var(--menta);
+  color: var(--turquesa-osc);
+}
+
+.jIcono svg {
+  width: 1.45rem;
+  height: 1.45rem;
+}
+
+.servicios {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding: 1.15rem 1.35rem;
+  border-radius: var(--radio-sm);
+  background: var(--turquesa-noche);
+  color: #fff;
+}
+
+.servicios h3 {
+  font-size: 1.05rem;
+  color: var(--mostaza-clara);
+}
+
+.servicios ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.servicios li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.servicios svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex: none;
+  color: var(--mostaza);
+}
+
+@media (min-width: 760px) {
+  .servicios {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 1.5rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .grados {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .jornadas {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Escritorio ancho: los grados forman una escalera que sube hacia 3.º (H25: desde 1200 px, para que
+   las tarjetas no queden demasiado estrechas; entre 640 y 1199 px van en dos columnas) */
+@media (min-width: 1200px) {
+  .escalera {
+    grid-template-columns: 4fr 3fr;
+    gap: 1.25rem;
+    align-items: end;
+  }
+  .grados {
+    align-items: end;
+  }
+  .escalera .grupo:first-child .grados {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .escalera .grupo:last-child .grados {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grado {
+    grid-template-columns: 1fr;
+    align-content: start;
+    justify-items: start;
+    min-height: calc(13.5rem + var(--i) * 1.4rem);
+    padding: 1.1rem 0.85rem;
+    row-gap: 0.4rem;
+  }
+  .insignia {
+    grid-row: auto;
+    margin-bottom: 0.35rem;
+  }
+}
+.acciones {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.75rem;
+}
+
+/* I-4: tabla «¿En qué grado entra mi hijo?» (22 nov 2026) */
+.edades {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  padding: 1.35rem 1.35rem 1.25rem;
+  border-radius: var(--radio);
+  background: var(--papel);
+  box-shadow: var(--sombra);
+}
+
+.edades h3 {
+  font-size: 1.35rem;
+}
+
+.edades table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.edades th,
+.edades td {
+  padding: 0.55rem 0.75rem;
+  text-align: left;
+  border-bottom: 1.5px solid var(--borde);
+}
+
+.edades thead th {
+  color: var(--tinta-suave);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.edades tbody th {
+  font-weight: 700;
+}
+
+.edades tbody tr:last-child th,
+.edades tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.edadesNota {
+  font-size: 1rem;
+  color: var(--tinta-suave);
+}
+
+@media (min-width: 760px) {
+  .edades {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    grid-template-rows: auto 1fr;
+    column-gap: 2.5rem;
+    align-items: start;
+  }
+  .edades table {
+    grid-row: span 2;
+    grid-column: 2;
+  }
+  .edades h3,
+  .edadesNota {
+    grid-column: 1;
+  }
+}

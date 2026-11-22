@@ -1,0 +1,149 @@
+.seccion {
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+  background: var(--fondo-menta);
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.lado {
+  display: grid;
+  justify-items: start;
+  align-content: start;
+}
+
+.lado header {
+  margin-bottom: 1.5rem;
+}
+
+.lista {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.15rem 1.25rem;
+  border-radius: var(--radio-sm);
+  background: var(--papel);
+  box-shadow: var(--sombra);
+  border-left: 5px solid var(--c);
+}
+
+.item h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.15rem;
+}
+
+.item p {
+  color: var(--tinta-suave);
+}
+
+.icono {
+  display: grid;
+  place-items: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  flex: none;
+  border-radius: 50%;
+  background: var(--c);
+  color: var(--tinta);
+}
+
+.icono svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+/* En celular el botón va al final, después de las tarjetas */
+.cta {
+  order: 2;
+}
+
+@media (max-width: 899px) {
+  .grid {
+    display: flex;
+    flex-direction: column;
+  }
+  .lado {
+    display: contents;
+  }
+  .cta {
+    order: 3;
+    align-self: flex-start;
+  }
+  .lista {
+    order: 2;
+  }
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: 5fr 6fr;
+    gap: 3rem;
+    align-items: start;
+  }
+}
+
+/* «El valor de este mes» (solo cuando site.valorDelMes tiene datos) */
+.valorMes {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: start;
+  margin-top: 2rem;
+  padding: clamp(1.35rem, 4vw, 2rem);
+  border-radius: var(--radio);
+  background: var(--papel);
+  box-shadow: var(--sombra);
+  border-top: 6px solid var(--mostaza);
+}
+
+.valorAnte {
+  color: var(--turquesa-noche);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+/* Enlace de texto (no botón): el siguiente bloque ya trae «Pregúntanos por WhatsApp» */
+.valorCompartir {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--turquesa-noche);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.valorMes h3 {
+  font-size: clamp(1.4rem, 4vw, 1.9rem);
+}
+
+.valorMes h3 em {
+  font-style: normal;
+  color: var(--naranja-osc);
+}
+
+.valorCita {
+  margin: 0;
+  padding-left: 1rem;
+  border-left: 4px solid var(--turquesa);
+}
+
+.valorCita p {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.valorCita cite {
+  color: var(--tinta-suave);
+  font-size: 0.9375rem;
+  font-style: normal;
+}

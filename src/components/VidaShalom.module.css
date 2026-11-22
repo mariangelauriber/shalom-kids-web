@@ -1,0 +1,236 @@
+.seccion {
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+  background: var(--fondo-lila);
+}
+
+/* Celular: dos columnas; el reel abierto ocupa todo el ancho */
+.grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: start;
+}
+
+/* Celular: si queda una tarjeta sola en la última fila, va centrada */
+@media (max-width: 639px) {
+  .grid > :last-child:nth-child(odd):not(.itemAbierto) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 0.375rem);
+  }
+}
+
+@media (min-width: 640px) {
+  .grid {
+    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* Portada del reel */
+.portada {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radio);
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--turquesa-noche);
+  text-align: left;
+  transition: transform 0.2s ease;
+}
+
+.portada:hover {
+  transform: translateY(-3px);
+}
+
+.portada:focus-visible {
+  outline: 3px solid var(--morado-osc);
+  outline-offset: 3px;
+}
+
+.portada img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.portada::after {
+  content: '';
+  position: absolute;
+  inset: 45% 0 0;
+  background: linear-gradient(transparent, rgb(20 25 50 / 0.85));
+}
+
+.play {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.92);
+  color: var(--tinta);
+}
+
+.play svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-left: 0.15rem;
+}
+
+.pTexto {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 1;
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.9rem;
+  color: #fff;
+}
+
+.pTitulo {
+  font-size: clamp(0.95rem, 3.4vw, 1.1rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.pAccion {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.pAccion svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.fachada {
+  display: grid;
+  gap: 0.5rem;
+  align-content: end;
+  justify-items: start;
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  padding: clamp(0.9rem, 3vw, 1.35rem);
+  border: 0;
+  border-radius: var(--radio);
+  text-align: left;
+  cursor: pointer;
+  color: var(--tinta);
+  background-image: radial-gradient(circle at 80% 15%, rgb(255 255 255 / 0.45) 0 18%, transparent 19%);
+  transition: transform 0.2s ease;
+}
+
+.fachada:hover {
+  transform: translateY(-3px) rotate(-0.5deg);
+}
+
+.fachada svg {
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: auto;
+}
+
+.c0 {
+  background-color: var(--naranja);
+}
+.c1 {
+  background-color: var(--turquesa);
+}
+.c2 {
+  background-color: var(--mostaza);
+}
+.c3 {
+  background-color: var(--morado);
+}
+
+.fTitulo {
+  font-size: clamp(1rem, 3.6vw, 1.3rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.fAccion {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Cada reel con su pie (I-8, 22 nov 2026) */
+.item {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  min-width: 0;
+}
+
+.pie {
+  padding-inline: 0.15rem;
+  color: var(--tinta-suave);
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+/* El reel abierto ocupa toda la fila para que se vea completo */
+.itemAbierto {
+  grid-column: 1 / -1;
+}
+
+.embed {
+  width: 100%;
+  max-width: 420px;
+  min-height: 420px;
+  justify-self: center;
+}
+
+.embed :global(.instagram-media) {
+  margin: 0 !important;
+  min-width: 0 !important;
+  width: 100% !important;
+}
+
+.vacio {
+  margin-bottom: 1.5rem;
+}
+
+.nota {
+  margin-top: 1.25rem;
+  color: var(--tinta-suave);
+  font-size: 1rem;
+}
+
+/* H27: enlace de texto con objetivo táctil de 44 px */
+.seguir {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  margin-top: 0.75rem;
+  color: var(--morado-osc);
+  font-weight: 800;
+  text-underline-offset: 3px;
+}
+
+.seguir svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}

@@ -1,0 +1,166 @@
+.form {
+  display: grid;
+  gap: 1rem;
+}
+
+.fila {
+  display: grid;
+  gap: 1rem;
+}
+
+.campo {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.campo > label,
+.campo > legend {
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 0;
+}
+
+.opcional {
+  font-weight: 400;
+  color: var(--tinta-suave);
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  min-height: 50px;
+  padding: 0.7rem 0.95rem;
+  border: 2px solid var(--borde);
+  border-radius: var(--radio-sm);
+  background: var(--papel);
+  font-size: 1rem; /* evita el zoom automático en iPhone */
+  transition: border-color 0.15s ease;
+}
+
+.campo textarea {
+  resize: vertical;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  outline: none;
+  border-color: var(--turquesa);
+  box-shadow: 0 0 0 4px rgb(42 161 183 / 0.18);
+}
+
+.opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.1rem;
+}
+
+.opcion {
+  position: relative;
+  cursor: pointer;
+}
+
+.opcion input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  cursor: pointer;
+}
+
+.opcion span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  border: 2px solid var(--borde);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.opcion input:checked + span {
+  background: var(--menta);
+  border-color: var(--turquesa);
+  color: var(--turquesa-noche);
+  font-weight: 600;
+}
+
+.opcion input:focus-visible + span {
+  outline: 3px solid var(--morado);
+  outline-offset: 2px;
+}
+
+.autorizacion {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  font-size: 0.875rem;
+  color: var(--tinta-suave);
+  cursor: pointer;
+}
+
+.autorizacion input {
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-top: 0.15rem;
+  flex: none;
+  accent-color: var(--turquesa-osc);
+}
+
+.autorizacion a {
+  font-weight: 600;
+}
+
+.error {
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radio-sm);
+  background: #fde8e8;
+  color: #9b1c1c;
+}
+
+.enviar {
+  justify-self: start;
+}
+
+.enviar:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.gracias {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: start;
+}
+
+.check {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--turquesa);
+  color: var(--tinta);
+}
+
+.check svg {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+@media (min-width: 560px) {
+  .fila {
+    grid-template-columns: 1fr 1fr;
+  }
+}

@@ -1,0 +1,165 @@
+.seccion {
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+  background: var(--fondo-durazno);
+}
+
+/* Tres bloques que se apilan sobre una base: el lenguaje del amor sostiene todo */
+.pasos {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.paso {
+  display: grid;
+  gap: 0.5rem;
+  align-content: start;
+  padding: 1.5rem 1.4rem 1.6rem;
+  border-radius: var(--radio);
+  background: var(--papel);
+  box-shadow: var(--sombra);
+  border-bottom: 6px solid var(--c);
+}
+
+.bloque {
+  display: grid;
+  place-items: center;
+  width: 3.4rem;
+  height: 3.4rem;
+  margin-bottom: 0.35rem;
+  border-radius: 0.9rem;
+  background: var(--c);
+  color: var(--tinta);
+  transform: rotate(var(--giro));
+}
+
+.bloque svg {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.paso h3 {
+  font-size: clamp(1.6rem, 4vw, 1.9rem);
+  line-height: 1.1;
+}
+
+.paso p {
+  color: var(--tinta-suave);
+}
+
+.base {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 1.35rem 1.4rem;
+  border-radius: var(--radio);
+  background: var(--morado-osc);
+  color: #fff;
+}
+
+.base h3 {
+  font-size: clamp(1.35rem, 3.5vw, 1.6rem);
+  margin-bottom: 0.2rem;
+}
+
+.base p {
+  color: rgb(255 255 255 / 0.92);
+}
+
+.corazon {
+  display: grid;
+  place-items: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  background: var(--mostaza);
+  color: var(--tinta);
+}
+
+.corazon svg {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.cierre {
+  display: grid;
+  gap: 1.5rem;
+  justify-items: start;
+  margin-top: 2rem;
+}
+
+.prueba {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.prueba p {
+  font-weight: 800;
+}
+
+.prueba ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.prueba a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 1rem 0.4rem 0.4rem;
+  border-radius: var(--radio-sm);
+  background: var(--papel);
+  box-shadow: var(--sombra);
+  color: var(--tinta);
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.prueba a:hover {
+  transform: translateY(-2px);
+}
+
+.prueba img {
+  width: 48px;
+  height: 85px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.prueba span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.prueba svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  color: var(--morado-osc);
+}
+
+@media (min-width: 760px) {
+  .pasos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .paso:nth-child(2) {
+    margin-top: -0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .base {
+    padding: 1.5rem 2rem;
+  }
+  .cierre {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+}
