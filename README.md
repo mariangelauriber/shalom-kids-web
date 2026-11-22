@@ -22,18 +22,3 @@ Lo que hay que subir al hosting es la carpeta `dist/` completa.
 - `src/data/blog.ts`: guías para familias; cada entrada genera su página y se incorpora al sitemap cuando se configura el dominio.
 
 Todo lo que vale `null` se muestra en la web como **[PENDIENTE]** y no se envía a Google ni a la IA.
-
-## Pendientes antes de publicar
-
-1. Confirmación del colegio: texto de adaptación, documentos de matrícula y tiempo de respuesta (escritos como modelo).
-4. Clave de Web3Forms. Se pide en web3forms.com con shalom_kids@hotmail.com y se pega en `web3formsClave`.
-5. Identificadores de Meta Pixel y GA4. El aviso de cookies solo aparece cuando hay alguno.
-6. Enlaces de Instagram aprobados por el colegio: sin rostros o con consentimiento.
-7. Aviso de privacidad: razón social, NIT, fecha y plazo de conservación, más la aprobación del colegio.
-8. Dominio y hosting, con autorización previa.
-
-## Fuera de la web (recomendado, con autorización)
-
-- Crear la ficha de Google Business Profile y la de Bing Places. ChatGPT busca con Bing.
-- Usar el mismo nombre, dirección y WhatsApp en todas partes: web, Google, Bing e Instagram.
-- Dar de alta el sitemap en Google Search Console y en Bing Webmaster Tools.

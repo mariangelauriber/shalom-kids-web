@@ -196,11 +196,11 @@ if (basePath && basePath !== '/') {
   console.log(`✓ Rutas con prefijo ${pre}/ en ${tocados} archivos (vista de revisión)`)
 }
 
-// Separación web / marketing (2026-11-22): el contenido de redes se genera en Marketing OS, nunca aquí
+// Esta carpeta es solo la web: el contenido de redes se genera fuera de ella
 const raiz = join(import.meta.dirname, '..')
 const mezclado = ['output', 'marca'].filter((c) => existsSync(join(raiz, c)))
 if (mezclado.length)
   console.log(
     `⚠ Material de marketing dentro de la web: ${mezclado.join(', ')}/. Va en ` +
-      '«Marketing OS/Shalom Kids/06 Carruseles e imágenes/_generacion/» (ver AGENTS.md).\n',
+      'la carpeta de generación de contenido, fuera de la web.\n',
   )

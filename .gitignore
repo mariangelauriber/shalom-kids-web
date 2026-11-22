@@ -1,18 +1,22 @@
+# Dependencias y compilados
 node_modules
 dist
 .vite-react-ssg-temp
 
-# Imágenes generadas para redes (pesadas; viven en el Marketing OS)
+# Material que no pertenece a la web
 output/
 marca/
 
-# Locales
-.env*
-*.log
-Thumbs.db
-.DS_Store
-
-# Documentos internos y reglas de agentes: solo en local (el repositorio puede hacerse público para revisión)
+# Documentación y configuración local de trabajo
 docs/
 AGENTS.md
 CLAUDE.md
+
+# Secretos y archivos locales: nunca se suben
+.env
+.env.*
+*.pem
+*.key
+*.log
+Thumbs.db
+.DS_Store
