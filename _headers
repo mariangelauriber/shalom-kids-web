@@ -1,5 +1,5 @@
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-h79QUnM36Ex51DznlGmOvDqR8/xdlvEVMhBUntuwCZA=' 'sha256-xXZ5UBi6J29rQtjpwjd9lS+lkKNpLwBSthOdDHZdX10=' 'sha256-3T3SNxfkVCsSXLoqWCnMnaafmqifqcz/19S077omPB0=' https://www.instagram.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; frame-src https://www.google.com https://www.instagram.com; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-h79QUnM36Ex51DznlGmOvDqR8/xdlvEVMhBUntuwCZA=' 'sha256-MLd//GTOFNSWKSNKubggpvej7noDtjTHP1b7vUO33XY=' 'sha256-3T3SNxfkVCsSXLoqWCnMnaafmqifqcz/19S077omPB0=' https://www.instagram.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; frame-src https://www.google.com https://www.instagram.com; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
   Strict-Transport-Security: max-age=31536000
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
