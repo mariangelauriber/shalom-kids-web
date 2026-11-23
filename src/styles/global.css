@@ -147,8 +147,9 @@ textarea {
   color: inherit;
 }
 
+/* Foco visible ≥ 3:1: morado oscuro sobre fondos claros (≈ 5:1); los bloques oscuros cambian --foco a blanco */
 :focus-visible {
-  outline: 3px solid var(--morado);
+  outline: 3px solid var(--foco, var(--morado-osc));
   outline-offset: 3px;
   border-radius: 6px;
 }
@@ -165,6 +166,7 @@ textarea {
 /* Portada (manual v3): turquesa con el patrón de útiles. Detrás del texto va un
    velo turquesa noche para que el blanco (≥ 7:1) y el mostaza (≥ 3:1) se lean */
 .fondo-portada {
+  --foco: #fff;
   position: relative;
   color: #fff;
   background-color: var(--turquesa-noche);

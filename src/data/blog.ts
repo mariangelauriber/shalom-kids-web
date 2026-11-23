@@ -76,7 +76,7 @@ export const blogPosts: BlogPost[] = [
           'Comparte con la maestra lo que notes en casa y escucha lo que ocurre en el aula. Si algo te preocupa o se repite, pide un momento para hablarlo. El objetivo es construir acuerdos a partir de lo que observan, sin fijar un plazo idéntico para todas las familias.',
         ],
         enlaces: [
-          { texto: 'Conoce el día a día que presentamos en Shalom Kids', href: '/#un-dia' },
+          { texto: 'Conoce cómo aprenden en Shalom Kids', href: '/#metodo' },
           { texto: 'Ideas de juego para compartir en casa', href: '/blog/juegos-cotidianos-en-casa/' },
         ],
       },

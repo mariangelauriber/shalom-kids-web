@@ -10,3 +10,13 @@ export const citaFe = {
   referencia: 'Salmo 139:14',
   version: 'NVI',
 }
+
+/**
+ * Cita de la tarjeta «Dimensión espiritual en acción» del método (rediseño de conversión del 23 nov 2026, sección 3:
+ * «Instruye al niño en su camino…»). Texto de la Reina-Valera 1960, que es la redacción del texto aprobado.
+ */
+export const citaMetodo = {
+  texto: 'Instruye al niño en su camino, y aun cuando fuere viejo no se apartará de él',
+  referencia: 'Proverbios 22:6',
+  version: 'RVR1960',
+}

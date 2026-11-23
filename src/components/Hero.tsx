@@ -1,32 +1,53 @@
 import { rotuloVisita, site } from '../data/site'
 import { EnlaceWhatsApp } from './EnlaceWhatsApp'
-import { IconoWhatsApp } from './Iconos'
+import { IconoCheck, IconoWhatsApp } from './Iconos'
 import s from './Hero.module.css'
 
-/* H26: las edades vuelven a verse de un vistazo */
-const etiquetas = ['Desde los 2 años hasta 3.º de primaria', 'Grupos pequeños', 'Énfasis en inglés']
+/**
+ * Rediseño de conversión, sección 1 (23 nov 2026). Ajuste 7: sin «gratis», «sin costo» ni «sin pagar inscripción»;
+ * ajuste 8: H1 principal del rediseño de conversión, sin prueba A/B ni fotos nuevas.
+ */
+const valor = [
+  'Primero nos visitas con tu hijo; después decides',
+  'Grupos pequeños de los 2 años a 3.º de primaria',
+  'Énfasis en inglés, cámaras, psicología y alimentación',
+  'Inclusión real, sin exigir diagnóstico previo',
+]
 
 export function Hero() {
+  const d = site.direccion
+  const confianza = [
+    'Calendario A (inicio a finales de enero)',
+    'Alineado al MEN (DBA)',
+    'Psicología y alimentación',
+    d.calle ? `${d.calle}, ${d.barrio}` : `Barrio ${d.barrio}`,
+  ]
+
   return (
     <section className={`${s.hero} fondo-portada`} aria-labelledby="titulo-inicio" id="inicio">
       <div className={`contenedor ${s.grid}`}>
         <div className={s.texto}>
-          <p className={s.ante}>Matrículas {site.matriculas.anio} abiertas</p>
+          <p className={s.ante}>
+            Matrículas {site.matriculas.anio} abiertas · Calendario A · {d.barrio}, {d.municipio}
+          </p>
 
-          {/* Storytelling (22 nov 2026): abre el hilo «por su nombre» que cierra el llamado final; sin «Soledad»
-              en el H1 porque también hay alumnos de Barranquilla (el <title> la conserva por SEO local) */}
+          {/* Abre el hilo «por su nombre» que cierra el llamado final (storytelling del 22 nov 2026) */}
           <h1 id="titulo-inicio" className={s.titulo}>
-            Colegio cristiano donde a tu hijo lo conocen <em>por su nombre</em>
+            Formamos niños felices, con carácter cristiano y bases académicas sólidas, <em>conocidos por su nombre</em>
           </h1>
 
           <p className={s.bajada}>
-            Estamos en {site.direccion.barrio}. Tu hijo puede empezar a los 2 años y seguir con nosotros
-            hasta 3.º de primaria, en grupos pequeños y con el lenguaje del amor y la sabiduría de Dios.
+            En Shalom Kids acompañamos a tu hijo desde párvulos (2 años) hasta 3.º de primaria en un mismo hogar
+            escolar. Unimos formación centrada en Cristo, aprendizajes alineados al Ministerio de Educación con énfasis
+            en inglés, grupos pequeños e inclusión escolar real.
           </p>
 
-          <ul className={s.etiquetas} aria-label="En resumen">
-            {etiquetas.map((e) => (
-              <li key={e}>{e}</li>
+          <ul className={s.valor} aria-label="Lo que encuentras en Shalom Kids">
+            {valor.map((v) => (
+              <li key={v}>
+                <IconoCheck />
+                {v}
+              </li>
             ))}
           </ul>
 
@@ -35,12 +56,11 @@ export function Hero() {
               <IconoWhatsApp />
               {rotuloVisita}
             </EnlaceWhatsApp>
-            <a href="#metodo" className="btn btn-borde">
-              Conoce el método
+            <a href="#niveles" className="btn btn-borde">
+              Ver grados y edades {site.matriculas.anio}
             </a>
           </div>
-          <p className={s.apoyo}>Primero conoces el colegio; después decides.</p>
-
+          {site.tiempoRespuesta && <p className={s.apoyo}>Te enviamos los costos {site.matriculas.anio} y te respondemos {site.tiempoRespuesta}.</p>}
         </div>
 
         <div className={s.sello} aria-hidden="true">
@@ -49,6 +69,15 @@ export function Hero() {
           <span className={`${s.burbuja} ${s.b2}`}>Amor</span>
           <span className={`${s.burbuja} ${s.b3}`}>Paz</span>
         </div>
+      </div>
+
+      {/* Barra de confianza (rediseño de conversión, sección 1): solo datos confirmados */}
+      <div className="contenedor">
+        <ul className={s.confianza} aria-label="Datos del colegio">
+          {confianza.map((c) => (
+            <li key={c}>{c}</li>
+          ))}
+        </ul>
       </div>
     </section>
   )

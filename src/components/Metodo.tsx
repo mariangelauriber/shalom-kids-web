@@ -1,7 +1,9 @@
 import type { CSSProperties, ReactNode } from 'react'
 import { metodo } from '../data/contenido'
+import { citaMetodo } from '../data/fe'
 import { site } from '../data/site'
 import { registrar } from '../lib/analytics'
+import { useValorDelMesVigente } from '../lib/renovacion'
 import { IconoCorazon, IconoInstagram } from './Iconos'
 import { TituloSeccion } from './TituloSeccion'
 import s from './Metodo.module.css'
@@ -34,8 +36,54 @@ const pasos: { icono: ReactNode; color: string; giro: string }[] = [
   { icono: <IconoLibro />, color: 'var(--turquesa)', giro: '-3deg' },
 ]
 
+/**
+ * Tarjeta «Dimensión espiritual en acción» (rediseño de conversión, sección 3). Cuando la profesora envía el valor del mes
+ * (site.valorDelMes, I-9 del 22 nov 2026), la tarjeta lo muestra con su versículo y la idea para la casa; mientras sea
+ * null o pase su fecha «hasta», muestra Proverbios 22:6 y la oración de cada mañana. Ajuste 5: sin «guía mensual».
+ */
+function DimensionEspiritual() {
+  const vigente = useValorDelMesVigente()
+  const v = vigente ? site.valorDelMes : null
+  const compartir = v
+    ? `Este mes en Shalom Kids trabajamos el valor de ${v.valor.toLowerCase()}: «${v.versiculo}» (${v.cita}). En casa: ${v.enCasa}`
+    : null
+
+  return (
+    <div className={s.base}>
+      <span className={s.corazon}>
+        <IconoCorazon />
+      </span>
+      <div className={s.baseTexto}>
+        <p className={s.insignia}>Dimensión espiritual en acción{v ? ` · ${v.mes}` : ''}</p>
+        <h3>{v ? <>Valor del mes en Shalom Kids: {v.valor}</> : 'Oración cada mañana y un valor cristiano cada mes'}</h3>
+        <blockquote className={s.cita}>
+          <p>«{v ? v.versiculo : citaMetodo.texto}»</p>
+          <cite>{v ? v.cita : `${citaMetodo.referencia} (${citaMetodo.version})`}</cite>
+        </blockquote>
+        <p>
+          Cada mañana iniciamos con oración y cada mes colegio y hogar caminamos unidos en un mismo principio cristiano.
+        </p>
+        {v && compartir && (
+          <>
+            <p>
+              <strong>En casa:</strong> {v.enCasa}
+            </p>
+            <a
+              href={`https://wa.me/?text=${encodeURIComponent(compartir)}`}
+              target="_blank"
+              rel="noopener"
+              className={s.compartir}
+            >
+              Compártelo con otra familia
+            </a>
+          </>
+        )}
+      </div>
+    </div>
+  )
+}
+
 export function Metodo() {
-  const [juega, construye, aprende, amor] = metodo
   /* H29: solo los reels de proyectos de aula (asignados a «metodo» en site.ts) */
   const proyectos = site.publicacionesInstagram.filter((p) => p.pagina === 'metodo' && p.portada)
 
@@ -44,40 +92,39 @@ export function Metodo() {
       <div className="contenedor">
         <TituloSeccion
           id="titulo-metodo"
-          antetitulo="Nuestro método"
-          titulo={<>Juega, <em>construye</em> y aprende</>}
-          intro="Los niños aprenden mejor cuando lo que hacen tiene sentido para ellos. Por eso partimos del juego, investigamos sus preguntas y avanzamos paso a paso en lectura, escritura y matemáticas."
+          antetitulo="Pedagogía con propósito y valores"
+          titulo={
+            <>
+              No solo enseñamos a leer y contar: despertamos el amor por aprender y <em>formamos el corazón</em>
+            </>
+          }
+          intro="Un niño que memoriza por presión olvida rápido; un niño que descubre con curiosidad y paz (Shalom) aprende para toda la vida. Combinamos principios bíblicos vivos con proyectos que nacen de sus preguntas diarias."
           color="naranja"
         />
 
         <ol className={s.pasos}>
-          {[juega, construye, aprende].map((m, i) => (
+          {metodo.map((m, i) => (
             <li
               key={m.titulo}
               className={s.paso}
               style={{ '--c': pasos[i].color, '--giro': pasos[i].giro } as CSSProperties}
             >
               <span className={s.bloque}>{pasos[i].icono}</span>
+              <p className={s.numero} aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}.
+              </p>
               <h3>{m.titulo}</h3>
               <p>{m.texto}</p>
             </li>
           ))}
         </ol>
 
-        <div className={s.base}>
-          <span className={s.corazon}>
-            <IconoCorazon />
-          </span>
-          <div>
-            <h3>{amor.titulo}</h3>
-            <p>{amor.texto}</p>
-          </div>
-        </div>
+        <DimensionEspiritual />
 
         <div className={s.cierre}>
           {proyectos.length > 0 && (
             <div className={s.prueba}>
-              <p>Mira un proyecto real:</p>
+              <p>Mira cómo se vive nuestro método en el salón:</p>
               <ul>
                 {proyectos.map((p) => (
                   <li key={p.url}>
@@ -89,7 +136,7 @@ export function Metodo() {
                     >
                       <img src={p.miniatura ?? p.portada} alt="" width={96} height={170} loading="lazy" decoding="async" />
                       <span>
-                        <IconoInstagram /> {p.titulo}
+                        <IconoInstagram /> Ver {p.titulo.charAt(0).toLocaleLowerCase('es') + p.titulo.slice(1)}
                       </span>
                     </a>
                   </li>

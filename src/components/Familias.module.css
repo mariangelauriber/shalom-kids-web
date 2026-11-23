@@ -92,58 +92,34 @@
   }
 }
 
-/* «El valor de este mes» (solo cuando site.valorDelMes tiene datos) */
-.valorMes {
+/* Testimonios (ajuste 2): solo se pintan si hay datos reales y autorizados en contenido.ts */
+.testimonios {
   display: grid;
-  gap: 0.75rem;
-  justify-items: start;
-  margin-top: 2rem;
-  padding: clamp(1.35rem, 4vw, 2rem);
-  border-radius: var(--radio);
+  gap: 1rem;
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.testimonios li {
+  padding: 1.25rem 1.35rem;
+  border-radius: var(--radio-sm);
   background: var(--papel);
   box-shadow: var(--sombra);
-  border-top: 6px solid var(--mostaza);
 }
 
-.valorAnte {
-  color: var(--turquesa-noche);
-  font-size: 0.9rem;
-  font-weight: 800;
-}
-
-/* Enlace de texto (no botón): el siguiente bloque ya trae «Pregúntanos por WhatsApp» */
-.valorCompartir {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  color: var(--turquesa-noche);
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-}
-
-.valorMes h3 {
-  font-size: clamp(1.4rem, 4vw, 1.9rem);
-}
-
-.valorMes h3 em {
-  font-style: normal;
-  color: var(--naranja-osc);
-}
-
-.valorCita {
+.testimonios blockquote {
   margin: 0;
-  padding-left: 1rem;
-  border-left: 4px solid var(--turquesa);
 }
 
-.valorCita p {
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-
-.valorCita cite {
+.autor {
+  margin-top: 0.5rem;
   color: var(--tinta-suave);
-  font-size: 0.9375rem;
-  font-style: normal;
+  font-weight: 700;
+}
+
+@media (min-width: 760px) {
+  .testimonios {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }

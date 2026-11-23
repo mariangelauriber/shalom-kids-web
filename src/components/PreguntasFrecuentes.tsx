@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { preguntas as preguntasColegio, textoRespuesta, type Pregunta } from '../data/contenido'
-import { useRenovacionVigente } from '../lib/renovacion'
+import { useDescuentoVigente, useRenovacionVigente } from '../lib/renovacion'
 import { EnlaceWhatsApp } from './EnlaceWhatsApp'
 import { IconoMas, IconoWhatsApp } from './Iconos'
 import { Pendiente } from './Pendiente'
@@ -32,7 +32,8 @@ export function PreguntasFrecuentes({
   className = '',
   sinBoton = false,
 }: Props) {
-  const renovacion = useRenovacionVigente()
+  /* H12 y ajuste 9: las frases de renovación y descuento desaparecen solas después de su fecha */
+  const vigentes = { renovacion: useRenovacionVigente(), descuento: useDescuentoVigente() }
 
   return (
     <section id="preguntas" className={`${s.seccion} ${className}`} aria-labelledby="titulo-preguntas">
@@ -58,7 +59,7 @@ export function PreguntasFrecuentes({
                 <IconoMas className={s.mas} />
               </summary>
               <p className={s.respuesta}>
-                {textoRespuesta(p, renovacion)}
+                {textoRespuesta(p, vigentes)}
                 {p.respuesta && p.pendiente ? ' ' : null}
                 {p.pendiente && <Pendiente>{p.pendiente}</Pendiente>}
                 {p.enlace && (

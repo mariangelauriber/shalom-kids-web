@@ -1,6 +1,8 @@
 .pie {
-  padding-block: 3rem calc(6.5rem + env(safe-area-inset-bottom, 0px));
+  /* Ajuste 11: en el celular, espacio para la barra fija inferior (unos 60 px + área segura) */
+  padding-block: 3rem calc(5.5rem + env(safe-area-inset-bottom, 0px));
   background: var(--tinta);
+  --foco: #fff;
   color: #d9dcea;
   font-size: 1rem;
 }

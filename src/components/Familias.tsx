@@ -1,12 +1,11 @@
 import type { CSSProperties, ReactNode } from 'react'
-import { familias } from '../data/contenido'
-import { site, type ValorDelMes } from '../data/site'
-import { useValorDelMesVigente } from '../lib/renovacion'
+import { familias, testimonios } from '../data/contenido'
+import { site } from '../data/site'
 import { IconoCalendario, IconoCorazon, IconoGrupo } from './Iconos'
 import { TituloSeccion } from './TituloSeccion'
 import s from './Familias.module.css'
 
-/** Sin «Seguimiento diario por WhatsApp» desde el 18 nov (pedido del usuario) */
+/** Sin «Seguimiento diario por WhatsApp» desde el 18 nov (decisión del colegio) */
 const estilos: { icono: ReactNode; color: string }[] = [
   { icono: <IconoGrupo />, color: 'var(--naranja)' },
   { icono: <IconoCorazon />, color: 'var(--morado)' },
@@ -14,48 +13,20 @@ const estilos: { icono: ReactNode; color: string }[] = [
 ]
 
 /**
- * «El valor de este mes» (I-9, 22 nov 2026): lo envía la profesora cada mes en site.valorDelMes.
- * Mientras sea null, o pasada su fecha «hasta», no se muestra nada. Se comparte por WhatsApp sin número
- * (la familia elige el contacto) con un enlace de texto, para no sumar otro botón de WhatsApp antes de las preguntas.
+ * Rediseño de conversión, sección 6 (23 nov 2026): comunidad. «El valor de este mes» pasó a la tarjeta espiritual del método.
+ * Ajuste 2: sin testimonios; el bloque solo aparece si el arreglo `testimonios` de contenido.ts tiene datos reales.
  */
-function ValorMes({ v }: { v: ValorDelMes }) {
-  const texto = `Este mes en Shalom Kids trabajamos el valor de ${v.valor.toLowerCase()}: «${v.versiculo}» (${v.cita}). En casa: ${v.enCasa}`
-  return (
-    <aside className={s.valorMes} aria-labelledby="titulo-valor-mes">
-      <p className={s.valorAnte}>Este mes en Shalom · {v.mes}</p>
-      <h3 id="titulo-valor-mes">
-        {v.valor}, un valor de <em>{v.pilar.toLowerCase()}</em>
-      </h3>
-      <blockquote className={s.valorCita}>
-        <p>«{v.versiculo}»</p>
-        <cite>{v.cita}</cite>
-      </blockquote>
-      <p>
-        <strong>En casa:</strong> {v.enCasa}
-      </p>
-      <a
-        href={`https://wa.me/?text=${encodeURIComponent(texto)}`}
-        target="_blank"
-        rel="noopener"
-        className={s.valorCompartir}
-      >
-        Compártelo con otra familia
-      </a>
-    </aside>
-  )
-}
-
 export function Familias() {
-  const valorVigente = useValorDelMesVigente()
+  const d = site.direccion
   return (
     <section id="familias" className={s.seccion} aria-labelledby="titulo-familias">
       <div className={`contenedor ${s.grid}`}>
         <div className={s.lado}>
           <TituloSeccion
             id="titulo-familias"
-            antetitulo="Familias Shalom"
-            titulo={<>Aquí la familia no espera afuera: <em>camina con nosotros</em></>}
-            intro="Sabes cómo avanza tu hijo. Colegio y casa, en el mismo equipo."
+            antetitulo={`Familias Shalom en ${d.barrio}`}
+            titulo={<>Aquí la familia no espera en la puerta: <em>caminamos en el mismo equipo</em></>}
+            intro="Educar funciona cuando colegio y hogar hablan el mismo idioma. Te acompañamos con reuniones periódicas, el valor cristiano del mes para conversar en casa y celebraciones memorables como el Día de la Biblia y nuestras clausuras."
             color="turquesa"
           />
           <a href="/blog/" className={`btn btn-borde ${s.cta}`}>
@@ -75,9 +46,18 @@ export function Familias() {
           ))}
         </ul>
       </div>
-      {site.valorDelMes && valorVigente && (
+      {testimonios.length > 0 && (
         <div className="contenedor">
-          <ValorMes v={site.valorDelMes} />
+          <ul className={s.testimonios} aria-label="Lo que dicen las familias">
+            {testimonios.map((t) => (
+              <li key={t.autor}>
+                <blockquote>
+                  <p>«{t.texto}»</p>
+                </blockquote>
+                <p className={s.autor}>{t.autor}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </section>

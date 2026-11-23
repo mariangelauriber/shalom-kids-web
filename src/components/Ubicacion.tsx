@@ -61,8 +61,8 @@ export function Ubicacion() {
         <div className={s.texto}>
           <TituloSeccion
             id="titulo-ubicacion"
-            antetitulo="Ubicación"
-            titulo={<>Cómo llegar a Shalom Kids en <em>{d.barrio}</em></>}
+            antetitulo={`Cerca de ti en ${d.municipio}`}
+            titulo={<>Visítanos en el barrio <em>{d.barrio}</em>, {d.municipio} ({d.departamento})</>}
             color="naranja"
           />
           <address className={s.direccion}>
@@ -91,7 +91,7 @@ export function Ubicacion() {
             {comoLlegar ? (
               <a href={comoLlegar} target="_blank" rel="noopener" className="btn btn-oscuro">
                 <IconoMapa />
-                Cómo llegar
+                Abrir ruta en Google Maps
               </a>
             ) : (
               <EnlaceWhatsApp origen="ubicacion" className="btn btn-primario">

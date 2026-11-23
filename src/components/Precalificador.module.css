@@ -1,0 +1,98 @@
+/* Pre-calificador (ajuste 13): tarjeta naranja de conversión con texto tinta (≥ 6:1) */
+.caja {
+  display: grid;
+  gap: 1.25rem;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  border-radius: var(--radio);
+  background: var(--naranja);
+  color: var(--tinta);
+}
+
+.caja h3 {
+  font-size: clamp(1.3rem, 3vw, 1.6rem);
+}
+
+.paso {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.pregunta {
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+
+.ayuda {
+  margin-top: -0.35rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.opcion {
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--tinta);
+  border-radius: 999px;
+  background: var(--papel);
+  color: var(--tinta);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  cursor: pointer;
+}
+
+.opcion:hover {
+  background: var(--crema);
+}
+
+.opcion[aria-pressed='true'] {
+  background: var(--tinta);
+  color: #fff;
+}
+
+.opcion:focus-visible {
+  border-radius: 999px;
+}
+
+/* Foco visible sobre el naranja: el morado no contrasta, se usa tinta (≥ 6:1) */
+.caja :focus-visible {
+  outline-color: var(--tinta);
+}
+
+.acciones {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.accion {
+  width: 100%;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.legal {
+  font-size: 1rem;
+}
+
+.legal a {
+  color: inherit;
+  font-weight: 700;
+}
+
+@media (min-width: 560px) {
+  .accion {
+    width: auto;
+  }
+  .acciones {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

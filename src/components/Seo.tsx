@@ -1,6 +1,6 @@
 import { Head } from 'vite-react-ssg'
-import { preguntas, textoRespuesta } from '../data/contenido'
-import { useRenovacionVigente } from '../lib/renovacion'
+import { preguntas, textoRespuesta, type Vigencias } from '../data/contenido'
+import { useDescuentoVigente, useRenovacionVigente } from '../lib/renovacion'
 import { site, urlMapa, urlWhatsApp } from '../data/site'
 
 interface Props {
@@ -20,7 +20,7 @@ function absoluta(ruta: string): string | null {
 }
 
 /** Datos estructurados (schema.org) para Google y asistentes de IA. Solo datos confirmados. */
-function datosEstructurados(renovacion: boolean) {
+function datosEstructurados(vigentes: Vigencias) {
   const d = site.direccion
   const colegio: Record<string, unknown> = {
     '@context': 'https://schema.org',
@@ -76,7 +76,7 @@ function datosEstructurados(renovacion: boolean) {
       .map((p) => ({
         '@type': 'Question',
         name: p.pregunta,
-        acceptedAnswer: { '@type': 'Answer', text: textoRespuesta(p, renovacion) },
+        acceptedAnswer: { '@type': 'Answer', text: textoRespuesta(p, vigentes) },
       })),
   }
 
@@ -86,8 +86,8 @@ function datosEstructurados(renovacion: boolean) {
 export function Seo({ titulo, descripcion, ruta, tipo = 'website', datosColegio, noIndexar, jsonLd = [] }: Props) {
   const canonica = absoluta(ruta)
   const imagen = absoluta('/img/og-shalom-kids.jpg') ?? '/img/og-shalom-kids.jpg'
-  /* H12: la frase de renovación de las preguntas frecuentes desaparece también del JSON-LD */
-  const renovacion = useRenovacionVigente()
+  /* H12 y ajuste 9: las frases de renovación y descuento de las preguntas frecuentes desaparecen también del JSON-LD */
+  const vigentes = { renovacion: useRenovacionVigente(), descuento: useDescuentoVigente() }
 
   return (
     <Head>
@@ -114,7 +114,7 @@ export function Seo({ titulo, descripcion, ruta, tipo = 'website', datosColegio,
       {site.geo && <meta name="geo.position" content={`${site.geo.lat};${site.geo.lng}`} />}
       {site.geo && <meta name="ICBM" content={`${site.geo.lat}, ${site.geo.lng}`} />}
 
-      {[...(datosColegio ? datosEstructurados(renovacion) : []), ...jsonLd].map((json, i) => (
+      {[...(datosColegio ? datosEstructurados(vigentes) : []), ...jsonLd].map((json, i) => (
           <script key={i} type="application/ld+json">
             {JSON.stringify(json).replace(/</g, '\\u003c')}
           </script>

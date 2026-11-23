@@ -1,20 +1,27 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { mensajesWhatsApp, rotuloVisita, site } from '../data/site'
+import { mensajesWhatsApp, site } from '../data/site'
 import { EnlaceWhatsApp } from './EnlaceWhatsApp'
 import { IconoWhatsApp } from './Iconos'
 import s from './Cabecera.module.css'
 
-/** Secciones del sitio: se usan en la cabecera y en el pie (H28, 22 nov 2026: «Matrícula» después de Niveles e Inclusión) */
+/**
+ * Menú principal (ajuste 12 del rediseño de conversión, 23 nov 2026): máximo 5 ítems + el botón «Agendar visita».
+ * Nosotros, Blog y Privacidad siguen enlazados en el pie y, en el menú móvil, debajo y separados.
+ */
 export const enlaces = [
-  { href: '/nosotros/', texto: 'Nosotros' },
   { href: '/#metodo', texto: 'Método' },
   { href: '/#niveles', texto: 'Niveles' },
   { href: '/inclusion/', texto: 'Inclusión' },
-  { href: '/#matricula', texto: 'Matrícula' },
+  { href: '/#matricula', texto: 'Matrícula 2027' },
+  { href: '/#preguntas', texto: 'Preguntas' },
+]
+
+/** Páginas que no van en el menú principal (pie y parte baja del menú móvil) */
+export const enlacesSecundarios = [
+  { href: '/nosotros/', texto: 'Nosotros' },
   { href: '/blog/', texto: 'Blog' },
   { href: '/vacacionales/', texto: 'Vacacional' },
-  { href: '/#preguntas', texto: 'Preguntas' },
 ].filter((e) => site.mostrarVacacional || e.href !== '/vacacionales/')
 
 export function Cabecera() {
@@ -45,9 +52,9 @@ export function Cabecera() {
     }
   }, [])
 
-  const navegacion = (cerrar?: () => void) => (
-    <ul>
-      {enlaces.map((e) => (
+  const lista = (items: { href: string; texto: string }[], cerrar?: () => void, clase?: string) => (
+    <ul className={clase}>
+      {items.map((e) => (
         <li key={e.href}>
           <a href={e.href} onClick={cerrar}>{e.texto}</a>
         </li>
@@ -68,7 +75,7 @@ export function Cabecera() {
             alt="Centro Educativo Shalom Kids"
           />
         </a>
-        <nav aria-label="Navegación principal" className={s.nav}>{navegacion()}</nav>
+        <nav aria-label="Navegación principal" className={s.nav}>{lista(enlaces)}</nav>
         <details
           ref={menu}
           className={s.menu}
@@ -92,15 +99,20 @@ export function Cabecera() {
           <summary ref={resumen} className={`btn btn-borde btn-sm ${s.resumen}`}>
             {abierto ? 'Cerrar' : 'Menú'}
           </summary>
-          <nav aria-label="Navegación móvil" className={s.panel}>{navegacion(cerrarMenu)}</nav>
+          <nav aria-label="Navegación móvil" className={s.panel}>
+            {lista(enlaces, cerrarMenu)}
+            {lista([...enlacesSecundarios, { href: '/privacidad/', texto: 'Aviso de privacidad' }], cerrarMenu, s.secundarios)}
+          </nav>
         </details>
-        {/* P20: «Agenda una visita por WhatsApp» completo no cabe en el celular; el ícono dice el canal */}
+        {/* Ajuste 7 (23 nov 2026): «Agendar visita» en la cabecera; el ícono dice el canal y el nombre accesible lo completa */}
         <EnlaceWhatsApp
           origen={enInclusion ? 'cabecera-inclusion' : 'cabecera'}
           mensaje={enInclusion ? mensajesWhatsApp.inclusion : undefined}
-          className={`btn btn-primario btn-sm ${s.visita}`} aria-label={rotuloVisita}>
+          className={`btn btn-primario btn-sm ${s.visita}`}
+          aria-label="Agendar visita por WhatsApp"
+        >
           <IconoWhatsApp />
-          Agenda una visita
+          Agendar visita
         </EnlaceWhatsApp>
       </div>
     </header>

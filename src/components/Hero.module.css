@@ -1,6 +1,6 @@
 /* Fondo turquesa con patrón: clase global .fondo-portada */
 .hero {
-  padding-block: clamp(2.5rem, 7vw, 5.5rem) clamp(3.5rem, 8vw, 6rem);
+  padding-block: clamp(2.5rem, 5vw, 4rem) clamp(3.5rem, 8vw, 6rem);
   /* Recorta solo a los lados (burbujas del sello) */
   overflow-x: clip;
 }
@@ -37,10 +37,11 @@
   font-weight: 700;
 }
 
+/* H1 del rediseño de conversión (más largo que el anterior): tamaño menor para que no ocupe toda la primera pantalla */
 .titulo {
-  font-size: clamp(2.05rem, 7.4vw, 3.5rem);
-  line-height: 1.06;
-  max-width: 19ch;
+  font-size: clamp(1.75rem, 6.2vw, 3rem);
+  line-height: 1.08;
+  max-width: 24ch;
   text-shadow: 0 2px 18px rgb(8 40 48 / 0.35);
 }
 
@@ -49,35 +50,59 @@
   max-width: 34rem;
 }
 
-.etiquetas {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+/* Value stack (rediseño de conversión): cuatro razones con chulo mostaza; blanco sobre el velo turquesa noche (≥ 7:1) */
+.valor {
+  display: grid;
+  gap: 0.45rem;
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.etiquetas li {
-  padding: 0.35rem 0.85rem;
-  border-radius: 999px;
-  background: var(--papel);
-  color: var(--tinta);
-  font-size: 0.875rem;
   font-weight: 700;
+  font-size: 1rem;
 }
 
-.etiquetas li:nth-child(1) {
-  box-shadow: inset 0 -3px 0 var(--naranja);
+.valor li {
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-start;
 }
-.etiquetas li:nth-child(2) {
-  box-shadow: inset 0 -3px 0 var(--morado);
+
+.valor svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  flex: none;
+  margin-top: 0.2rem;
+  color: var(--mostaza);
 }
-.etiquetas li:nth-child(3) {
-  box-shadow: inset 0 -3px 0 var(--turquesa);
+
+/* En el celular el llamado sube antes de la lista de razones, para que se vea en la primera pantalla */
+@media (max-width: 639.98px) {
+  /* Menos aire arriba y entre bloques: a 360x740 el botón queda completo por encima de la barra fija inferior */
+  .hero {
+    padding-top: 1.5rem;
+  }
+  .texto {
+    gap: 1.1rem;
+  }
 }
-.etiquetas li:nth-child(4) {
-  box-shadow: inset 0 -3px 0 var(--mostaza);
+
+/* El llamado va antes de la lista de razones en todos los anchos: en el celular entra en la primera pantalla
+   y en escritorio (1280x800, 1366x768, 1024x768) queda por encima del pliegue */
+.acciones {
+  order: 1;
+}
+.apoyo {
+  order: 2;
+}
+.valor {
+  order: 3;
+}
+
+@media (min-width: 640px) {
+  .valor {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.25rem;
+  }
 }
 
 .acciones {
@@ -140,9 +165,12 @@
     background: var(--mostaza);
     transform: rotate(-8deg);
   }
+  /* Ajuste 15: «Amor» ya no sale del borde derecho (antes right: -10% quedaba recortado por overflow-x: clip
+     cuando el margen del contenedor es menor que la salida de la burbuja, p. ej. entre 880 y 1200 px).
+     -4% del sello (máx. 16 px) cabe en el margen mínimo del contenedor (20 px) */
   .b2 {
-    top: 48%;
-    right: -10%;
+    top: 62%;
+    right: -4%;
     background: var(--naranja);
     transform: rotate(6deg);
   }
@@ -154,10 +182,59 @@
   }
 }
 
+/* Con el sello más pequeño (880-1099 px) «Amor» a media altura tapa el texto del anillo: baja a la esquina inferior */
+/* 880-1199 px: «Amor» sube a la esquina superior derecha, dentro del sello, lejos del borde de la ventana
+   y del botón flotante de WhatsApp (que ocupa la esquina inferior derecha) */
+@media (min-width: 880px) and (max-width: 1199.98px) {
+  .b2 {
+    top: 3%;
+    bottom: auto;
+    right: 2%;
+  }
+}
+
 /* Línea de apoyo del llamado (storytelling, 22 nov 2026): blanco sobre el velo turquesa noche (≥ 7:1) */
 .apoyo {
   margin-top: -0.5rem;
   font-size: 1rem;
   font-weight: 600;
   color: #fff;
+}
+
+/* Barra de confianza (rediseño de conversión, sección 1) */
+.confianza {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem 1rem;
+  margin: clamp(2rem, 5vw, 3rem) 0 0;
+  padding: 1rem 0 0;
+  list-style: none;
+  border-top: 1px solid rgb(255 255 255 / 0.25);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.confianza li {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.confianza li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--mostaza);
+}
+
+@media (min-width: 960px) {
+  .confianza {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 }

@@ -3,28 +3,51 @@
   background: var(--fondo-menta);
 }
 
-.escalera {
-  display: grid;
-  gap: 2rem;
-}
-
-.grupoTitulo {
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--tinta-suave);
-  margin-bottom: 0.85rem;
+/* Pestañas Preescolar / Primaria (rediseño de conversión, sección 4) */
+.lista {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
 }
 
-.grupoTitulo::after {
-  content: '';
-  flex: 1;
-  height: 2px;
-  background: repeating-linear-gradient(90deg, var(--borde) 0 8px, transparent 8px 14px);
+.pestana {
+  min-height: 48px;
+  padding: 0.6rem 1.2rem;
+  border: 1.5px solid var(--turquesa-osc);
+  border-radius: 999px;
+  background: var(--papel);
+  color: var(--turquesa-noche);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.pestana span {
+  font-weight: 600;
+}
+
+.pestana[aria-selected='true'] {
+  background: var(--turquesa-noche);
+  border-color: var(--turquesa-noche);
+  color: #fff;
+}
+
+.pestana:focus-visible {
+  border-radius: 999px;
+}
+
+.panel {
+  display: grid;
+  gap: 1rem;
+  border-radius: var(--radio-sm);
+}
+
+.panel[hidden] {
+  display: none;
+}
+
+.promesa {
+  font-size: clamp(1.3rem, 3vw, 1.6rem);
 }
 
 .grados {
@@ -66,15 +89,18 @@
   font-size: 1.15rem;
 }
 
+.edad {
+  color: var(--tinta-suave);
+  font-family: var(--f-texto);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
 .dato {
   font-size: 1rem;
   color: var(--tinta-suave);
 }
 
-.dato span {
-  font-weight: 600;
-  color: var(--tinta);
-}
 
 .fuente {
   margin-top: 1rem;
@@ -82,58 +108,15 @@
   color: var(--tinta-suave);
 }
 
-.jornadas {
-  display: grid;
-  gap: 1rem;
-  margin: 2.5rem 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.jornada {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-  padding: 1.25rem 1.35rem;
-  border-radius: var(--radio-sm);
-  background: var(--papel);
-  border: 2px dashed var(--borde);
-}
-
-.jornada h3 {
-  font-size: 1.05rem;
-  margin-bottom: 0.15rem;
-}
-
-.jornada p {
-  font-size: 1rem;
-  color: var(--tinta-suave);
-}
-
-.jIcono {
-  display: grid;
-  place-items: center;
-  width: 2.8rem;
-  height: 2.8rem;
-  flex: none;
-  border-radius: 50%;
-  background: var(--menta);
-  color: var(--turquesa-osc);
-}
-
-.jIcono svg {
-  width: 1.45rem;
-  height: 1.45rem;
-}
-
 .servicios {
   display: grid;
   gap: 0.75rem;
-  margin-top: 1rem;
+  margin-top: 2rem;
   padding: 1.15rem 1.35rem;
   border-radius: var(--radio-sm);
   background: var(--turquesa-noche);
   color: #fff;
+  --foco: #fff;
 }
 
 .servicios h3 {
@@ -175,36 +158,18 @@
 
 @media (min-width: 640px) {
   .grados {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .jornadas {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-/* Escritorio ancho: los grados forman una escalera que sube hacia 3.º (H25: desde 1200 px, para que
-   las tarjetas no queden demasiado estrechas; entre 640 y 1199 px van en dos columnas) */
-@media (min-width: 1200px) {
-  .escalera {
-    grid-template-columns: 4fr 3fr;
-    gap: 1.25rem;
-    align-items: end;
-  }
+@media (min-width: 1100px) {
   .grados {
-    align-items: end;
-  }
-  .escalera .grupo:first-child .grados {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  .escalera .grupo:last-child .grados {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
   }
   .grado {
     grid-template-columns: 1fr;
     align-content: start;
     justify-items: start;
-    min-height: calc(13.5rem + var(--i) * 1.4rem);
-    padding: 1.1rem 0.85rem;
     row-gap: 0.4rem;
   }
   .insignia {
@@ -212,6 +177,7 @@
     margin-bottom: 0.35rem;
   }
 }
+
 .acciones {
   display: flex;
   justify-content: center;

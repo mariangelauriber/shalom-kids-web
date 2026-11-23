@@ -7,9 +7,14 @@ const fechaCompilacion = new Date().toISOString()
 /** H10: solo se precargan las fuentes latinas; las demás (hebreo de /nosotros/) se bajan solo si se usan */
 const fuentesPrecargadas = ['nunito-latin-wght-normal', 'fredoka-latin-wght-normal']
 
+// Ruta base: "/" en el hosting definitivo; "/shalom-kids-web/" para la vista de revisión en GitHub Pages.
+// Desde Git Bash, MSYS la convierte en «C:/Program Files/Git/...»: se detiene la compilación (usar MSYS_NO_PATHCONV=1)
+const basePath = (globalThis as { process?: { env: Record<string, string | undefined> } }).process?.env.BASE_PATH ?? '/'
+if (!basePath.startsWith('/') || basePath.includes(':'))
+  throw new Error(`BASE_PATH no válido: «${basePath}». Debe empezar por «/» (p. ej. /shalom-kids-web/).`)
+
 export default defineConfig({
-  // Ruta base: "/" en el hosting definitivo; "/shalom-kids-web/" para la vista de revisión en GitHub Pages
-  base: (globalThis as { process?: { env: Record<string, string | undefined> } }).process?.env.BASE_PATH ?? '/',
+  base: basePath,
   plugins: [react()],
   define: {
     __FECHA_COMPILACION__: JSON.stringify(fechaCompilacion),

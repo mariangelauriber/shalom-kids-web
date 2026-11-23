@@ -1,4 +1,4 @@
-/* I-2: fondo blanco entre la portada (turquesa) y el método (durazno) */
+/* Sección 2 del rediseño de conversión (antes I-2): fondo blanco entre la portada (turquesa) y el método (durazno) */
 .seccion {
   padding-block: clamp(3.5rem, 8vw, 5.5rem);
 }
@@ -48,8 +48,47 @@
   }
 }
 
-@media (min-width: 1024px) {
-  .dudas {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+/* «Así es el ingreso en Shalom» (ajuste 6): cuatro puntos en positivo */
+.ingreso {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: clamp(1.35rem, 4vw, 2rem);
+  border-radius: var(--radio);
+  background: var(--turquesa-noche);
+  color: #fff;
+  --foco: #fff;
+}
+
+.ingreso h3 {
+  font-size: clamp(1.3rem, 3vw, 1.6rem);
+  color: var(--mostaza-clara);
+}
+
+.ingreso ul {
+  display: grid;
+  gap: 0.85rem 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ingreso li {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+}
+
+.ingreso svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+  margin-top: 0.2rem;
+  color: var(--mostaza);
+}
+
+@media (min-width: 760px) {
+  .ingreso ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

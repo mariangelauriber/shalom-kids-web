@@ -40,8 +40,16 @@
   height: 1.8rem;
 }
 
+.numero {
+  color: var(--tinta-suave);
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+}
+
 .paso h3 {
-  font-size: clamp(1.6rem, 4vw, 1.9rem);
+  font-size: clamp(1.35rem, 3.4vw, 1.6rem);
   line-height: 1.1;
 }
 
@@ -53,7 +61,7 @@
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 1rem;
-  align-items: center;
+  align-items: start;
   margin-top: 1rem;
   padding: 1.35rem 1.4rem;
   border-radius: var(--radio);
@@ -68,6 +76,54 @@
 
 .base p {
   color: rgb(255 255 255 / 0.92);
+}
+
+.baseTexto {
+  display: grid;
+  gap: 0.6rem;
+  justify-items: start;
+}
+
+/* Insignia «Dimensión espiritual en acción»: tinta sobre mostaza (≥ 8:1).
+   Selector .base .insignia para ganarle a .base p (la insignia es un <p>) */
+.base .insignia {
+  padding: 0.2rem 0.75rem;
+  border-radius: 999px;
+  background: var(--mostaza);
+  color: var(--tinta);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cita {
+  margin: 0;
+  padding-left: 1rem;
+  border-left: 4px solid var(--mostaza);
+}
+
+.cita p {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.cita cite {
+  color: rgb(255 255 255 / 0.92);
+  font-size: 0.9375rem;
+  font-style: normal;
+}
+
+/* Enlace de texto (no botón) para compartir el valor del mes */
+.compartir {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 .corazon {

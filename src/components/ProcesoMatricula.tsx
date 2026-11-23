@@ -1,43 +1,88 @@
-import { pasosMatricula } from '../data/contenido'
-import { rotuloVisita, site } from '../data/site'
-import { useRenovacionVigente } from '../lib/renovacion'
+import { incluyeFormacion, pasosMatricula } from '../data/contenido'
+import { mensajesWhatsApp, site } from '../data/site'
+import { useDescuentoVigente, useRenovacionVigente } from '../lib/renovacion'
 import { EnlaceWhatsApp } from './EnlaceWhatsApp'
 import { FormularioCupo } from './FormularioCupo'
-import { IconoWhatsApp } from './Iconos'
+import { IconoCheck, IconoWhatsApp } from './Iconos'
 import { Pendiente } from './Pendiente'
+import { Precalificador } from './Precalificador'
 import { TituloSeccion } from './TituloSeccion'
 import s from './ProcesoMatricula.module.css'
 
 /**
- * H12: recuadro de renovación. El HTML compilado lo trae solo si se compiló antes del fin de la renovación;
- * en el navegador se oculta después de hidratar si la fecha ya pasó.
+ * H12 y ajuste 10: banner de renovación. El HTML compilado lo trae solo si se compiló antes del 30 nov 2026;
+ * en el navegador se oculta después de hidratar si la fecha ya pasó. Después no se dice nada.
  */
 function Renovacion() {
   const vigente = useRenovacionVigente()
 
   if (!vigente) return null
   return (
-    <p className={s.renovacion}>
-      <strong>¿Ya eres familia Shalom?</strong> Renueva la matrícula de tu hijo {site.matriculas.renovacion}.
+    <div className={s.renovacion}>
+      <p>
+        <strong>¿Tu hijo ya estudia en Shalom Kids?</strong> Asegura su cupo para {site.matriculas.anio}: el plazo de
+        renovación para familias actuales cierra el 30 de noviembre de 2026.
+      </p>
+      <EnlaceWhatsApp origen="matricula-renovacion" mensaje={mensajesWhatsApp.renovacion} className="btn btn-claro btn-sm">
+        <IconoWhatsApp />
+        Renovar matrícula por WhatsApp
+      </EnlaceWhatsApp>
+    </div>
+  )
+}
+
+/** Ajuste 9: descuento de matrícula de la FICHA (el monto va por WhatsApp). Desde el 4 dic 2026 desaparece solo. */
+function Descuento() {
+  const vigente = useDescuentoVigente()
+
+  if (!vigente) return null
+  return (
+    <p className={s.descuento}>
+      {site.matriculas.descuento} El monto te lo informamos por WhatsApp.
     </p>
   )
 }
 
+/**
+ * Rediseño de conversión, sección 7 (23 nov 2026). Ajuste 1: sin cifras ni afirmaciones sobre las tarifas; los costos 2027 se
+ * envían por WhatsApp. H04: el formulario solo aparece cuando haya clave de Web3Forms.
+ */
 export function ProcesoMatricula() {
-  /* H04: mientras no haya clave de Web3Forms, una sola tarjeta con un solo botón de WhatsApp */
   const conFormulario = Boolean(site.web3formsClave)
+  const anio = site.matriculas.anio
 
   return (
     <section id="matricula" className={`${s.seccion}`} aria-labelledby="titulo-matricula">
       <div className="contenedor">
         <TituloSeccion
           id="titulo-matricula"
-          antetitulo={`Matrícula ${site.matriculas.anio}`}
-          titulo={<>De la primera visita a la <em>matrícula</em></>}
-          intro={`Las matrículas ${site.matriculas.anio} están abiertas ${site.matriculas.cierre}. Son tres pasos, y el primero es conocernos.`}
+          antetitulo={`Admisiones y matrículas ${anio} (Calendario A)`}
+          titulo={
+            <>
+              Costos claros por WhatsApp y <em>3 pasos</em> para empezar
+            </>
+          }
+          intro={`Te enviamos los costos ${anio} por WhatsApp. Las matrículas ${anio} están abiertas ${site.matriculas.cierre}.`}
           color="naranja"
           claro
         />
+
+        <Descuento />
+
+        <div className={s.oferta}>
+          <div className={s.incluye}>
+            <h3>Qué incluye la formación</h3>
+            <ul>
+              {incluyeFormacion.map((i) => (
+                <li key={i}>
+                  <IconoCheck />
+                  {i}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <Precalificador />
+        </div>
 
         <ol className={s.pasos}>
           {pasosMatricula.map((p, i) => (
@@ -56,35 +101,13 @@ export function ProcesoMatricula() {
 
         <Renovacion />
 
-        <div className={`${s.contacto} ${conFormulario ? '' : s.contactoUnico}`}>
-          <div className={s.wa}>
-            <h3>Escríbenos por WhatsApp</h3>
-            <p>
-              Pregunta por el grado que buscas, el proceso o las fechas para conocer el colegio.{' '}
-              {!conFormulario && <>Por WhatsApp también te enviamos el formulario de matrícula. </>}
-              {site.tiempoRespuesta ? (
-                <>Te respondemos {site.tiempoRespuesta}.</>
-              ) : (
-                <Pendiente>tiempo de respuesta</Pendiente>
-              )}
-            </p>
-            <EnlaceWhatsApp origen="matricula" className="btn btn-oscuro">
-              <IconoWhatsApp />
-              {rotuloVisita}
-            </EnlaceWhatsApp>
-            <p className={s.legal}>
-              Al escribirnos, tus datos se tratan según nuestro <a href="/privacidad/">aviso de privacidad</a>.
-            </p>
+        {conFormulario && (
+          <div className={s.form} id="formulario">
+            <h3>Formulario de matrícula</h3>
+            <p>Déjanos tus datos para que podamos enviártelo por WhatsApp.</p>
+            <FormularioCupo />
           </div>
-
-          {conFormulario && (
-            <div className={s.form} id="formulario">
-              <h3>Formulario de matrícula</h3>
-              <p>Déjanos tus datos para que podamos enviártelo por WhatsApp.</p>
-              <FormularioCupo />
-            </div>
-          )}
-        </div>
+        )}
       </div>
     </section>
   )

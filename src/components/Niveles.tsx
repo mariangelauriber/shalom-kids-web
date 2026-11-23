@@ -1,8 +1,8 @@
-import type { CSSProperties } from 'react'
-import { ingreso, preescolar, primaria, servicios, type Grado } from '../data/contenido'
-import { rotuloVisita } from '../data/site'
+import { useRef, useState, type CSSProperties, type KeyboardEvent } from 'react'
+import { complementos, etapas, preescolar, primaria, type Grado } from '../data/contenido'
+import { mensajesWhatsApp, site } from '../data/site'
 import { EnlaceWhatsApp } from './EnlaceWhatsApp'
-import { IconoCalendario, IconoCasa, IconoCheck, IconoSol, IconoWhatsApp } from './Iconos'
+import { IconoCheck, IconoWhatsApp } from './Iconos'
 import { Pendiente } from './Pendiente'
 import { TituloSeccion } from './TituloSeccion'
 import s from './Niveles.module.css'
@@ -11,15 +11,81 @@ const colores = ['var(--mostaza)', 'var(--naranja)', 'var(--morado)', 'var(--tur
 
 function TarjetaGrado({ g, i }: { g: Grado; i: number }) {
   return (
-    <li className={s.grado} style={{ '--i': i, '--c': colores[i] } as CSSProperties}>
+    <li className={s.grado} style={{ '--c': colores[i] } as CSSProperties}>
       <span className={s.insignia} aria-hidden="true">
         {g.corto}
       </span>
-      <h4 className={s.nombre}>{g.nombre}</h4>
-      <p className={s.dato}>
-        <span>Lo que aprende:</span> {g.logros ?? <Pendiente>logros</Pendiente>}
-      </p>
+      <h4 className={s.nombre}>
+        {g.nombre} <span className={s.edad}>({g.edad})</span>
+      </h4>
+      <p className={s.dato}>{g.logros ?? <Pendiente>logros</Pendiente>}</p>
     </li>
+  )
+}
+
+/**
+ * Pestañas Preescolar / Primaria (rediseño de conversión, sección 4) con el patrón ARIA de pestañas: flechas, Inicio y Fin.
+ * Los dos paneles van en el HTML compilado (el inactivo con `hidden`), así Google y las IA leen todos los logros.
+ */
+function PestanasGrados() {
+  const [activa, setActiva] = useState(0)
+  const botones = useRef<(HTMLButtonElement | null)[]>([])
+
+  function alTeclear(event: KeyboardEvent<HTMLButtonElement>) {
+    const ultimo = etapas.length - 1
+    let destino: number | null = null
+    if (event.key === 'ArrowRight') destino = activa === ultimo ? 0 : activa + 1
+    else if (event.key === 'ArrowLeft') destino = activa === 0 ? ultimo : activa - 1
+    else if (event.key === 'Home') destino = 0
+    else if (event.key === 'End') destino = ultimo
+    if (destino === null) return
+    event.preventDefault()
+    setActiva(destino)
+    botones.current[destino]?.focus()
+  }
+
+  return (
+    <div className={s.pestanas}>
+      <div role="tablist" aria-label="Etapas escolares" className={s.lista}>
+        {etapas.map((e, i) => (
+          <button
+            key={e.id}
+            ref={(b) => {
+              botones.current[i] = b
+            }}
+            type="button"
+            role="tab"
+            id={`pestana-${e.id}`}
+            aria-selected={i === activa}
+            aria-controls={`panel-${e.id}`}
+            tabIndex={i === activa ? 0 : -1}
+            className={s.pestana}
+            onClick={() => setActiva(i)}
+            onKeyDown={alTeclear}
+          >
+            {e.nombre} <span>({e.edades})</span>
+          </button>
+        ))}
+      </div>
+      {etapas.map((e, i) => (
+        <div
+          key={e.id}
+          role="tabpanel"
+          id={`panel-${e.id}`}
+          aria-labelledby={`pestana-${e.id}`}
+          hidden={i !== activa}
+          tabIndex={0}
+          className={s.panel}
+        >
+          <h3 className={s.promesa}>{e.promesa}</h3>
+          <ol className={s.grados}>
+            {e.grados.map((g, j) => (
+              <TarjetaGrado key={g.nombre} g={g} i={j + (i === 0 ? 0 : preescolar.length)} />
+            ))}
+          </ol>
+        </div>
+      ))}
+    </div>
   )
 }
 
@@ -29,36 +95,24 @@ export function Niveles() {
       <div className="contenedor">
         <TituloSeccion
           id="titulo-niveles"
-          antetitulo="Niveles"
-          titulo={<>De párvulos a <em>3.º de primaria</em></>}
-          intro={`Tu hijo puede empezar en párvulos desde los ${ingreso.edadMinima} y seguir hasta ${ingreso.gradoMaximo} en el mismo colegio. Conoce lo que se trabaja en cada grado.`}
+          antetitulo="Continuidad sin cambios bruscos"
+          titulo={
+            <>
+              Un solo colegio desde los 2 años hasta 3.º de primaria: <em>míralo crecer</em> donde ya lo aman
+            </>
+          }
+          intro="En Shalom Kids tu hijo vive su primera infancia y sus primeros años de primaria rodeado de rostros conocidos, valores constantes y maestras que conocen su historia."
           color="turquesa"
         />
 
-        <div className={s.escalera}>
-          <div className={s.grupo}>
-            <h3 className={s.grupoTitulo}>Preescolar</h3>
-            <ol className={s.grados}>
-              {preescolar.map((g, i) => (
-                <TarjetaGrado key={g.nombre} g={g} i={i} />
-              ))}
-            </ol>
-          </div>
-          <div className={s.grupo}>
-            <h3 className={s.grupoTitulo}>Primaria</h3>
-            <ol className={s.grados}>
-              {primaria.map((g, i) => (
-                <TarjetaGrado key={g.nombre} g={g} i={i + preescolar.length} />
-              ))}
-            </ol>
-          </div>
-        </div>
+        <PestanasGrados />
+        {/* Ajuste 16: se conserva la frase de autoridad sobre Bases Curriculares y DBA */}
         <p className={s.fuente}>
-          Logros basados en las Bases Curriculares para la Educación Inicial y Preescolar y los Derechos Básicos de Aprendizaje (DBA) del
-          Ministerio de Educación Nacional.
+          Logros alineados a las Bases Curriculares para la Educación Inicial y Preescolar y los Derechos Básicos de
+          Aprendizaje (DBA) del Ministerio de Educación Nacional.
         </p>
 
-        {/* I-4 (22 nov 2026): edades de referencia de la Secretaría de Educación, sin fecha de corte */}
+        {/* I-4 (22 nov 2026): edades de referencia de la Secretaría de Educación, sin fecha de corte exacta */}
         <div className={s.edades}>
           <h3 id="titulo-edades">¿En qué grado entra mi hijo?</h3>
           <table aria-labelledby="titulo-edades">
@@ -78,56 +132,26 @@ export function Niveles() {
             </tbody>
           </table>
           <p className={s.edadesNota}>
-            Edades de referencia según la Secretaría de Educación. Escríbenos con la fecha de nacimiento de tu hijo y te
-            confirmamos el grado.
+            Edades de referencia según la Secretaría de Educación. ¿Cumple años cerca de la fecha de corte? Escríbenos su
+            fecha de nacimiento y te confirmamos su grado exacto.
           </p>
         </div>
 
-        <ul className={s.jornadas}>
-          <li className={s.jornada}>
-            <span className={s.jIcono}>
-              <IconoSol />
-            </span>
-            <div>
-              <h3>Jornada diurna</h3>
-              <p>De lunes a viernes. Te enviamos los horarios por WhatsApp.</p>
-            </div>
-          </li>
-          <li className={s.jornada}>
-            <span className={s.jIcono}>
-              <IconoCasa />
-            </span>
-            <div>
-              <h3>Un solo colegio hasta 3.º</h3>
-              <p>Tu hijo crece en un lugar que ya conoce y donde todos lo conocen.</p>
-            </div>
-          </li>
-          <li className={s.jornada}>
-            <span className={s.jIcono}>
-              <IconoCalendario />
-            </span>
-            <div>
-              <h3>Calendario A</h3>
-              <p>El año escolar empieza a finales de enero.</p>
-            </div>
-          </li>
-        </ul>
-
         <div className={s.servicios}>
-          <h3>Actividades y servicios</h3>
+          <h3>Complementos de la jornada diurna (lunes a viernes)</h3>
           <ul>
-            {servicios.map((sv) => (
-              <li key={sv}>
+            {complementos.map((c) => (
+              <li key={c}>
                 <IconoCheck />
-                {sv}
+                {c}
               </li>
             ))}
           </ul>
         </div>
         <div className={s.acciones}>
-          <EnlaceWhatsApp origen="niveles" className="btn btn-borde">
+          <EnlaceWhatsApp origen="niveles" mensaje={mensajesWhatsApp.grados} className="btn btn-primario">
             <IconoWhatsApp />
-            {rotuloVisita}
+            Confirmar grado, horarios y cupo {site.matriculas.anio} por WhatsApp
           </EnlaceWhatsApp>
         </div>
       </div>

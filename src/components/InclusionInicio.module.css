@@ -1,0 +1,80 @@
+/* Rediseño de conversión, sección 5: fondo lila entre los niveles (menta) y las familias (menta) */
+.seccion {
+  padding-block: clamp(3.5rem, 8vw, 5.5rem);
+  background: var(--fondo-lila);
+}
+
+.pasos {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.paso {
+  display: grid;
+  gap: 0.4rem;
+  align-content: start;
+  padding: 1.4rem 1.35rem;
+  border-radius: var(--radio);
+  background: var(--papel);
+  box-shadow: var(--sombra);
+}
+
+.paso h3 {
+  font-size: 1.2rem;
+}
+
+.paso p {
+  color: var(--tinta-suave);
+}
+
+.numero {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: 0.3rem;
+  border-radius: 50%;
+  background: var(--morado-osc);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.nota {
+  margin-top: 1.25rem;
+  max-width: 46rem;
+  color: var(--tinta-suave);
+  font-size: 1rem;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Enlace de texto con la flecha pegada a la última palabra; el padding da un objetivo táctil de unos 44 px */
+.enlace {
+  display: inline-block;
+  padding-block: 0.6rem;
+  color: var(--morado-osc);
+  font-weight: 800;
+  text-underline-offset: 3px;
+}
+
+.cuidado {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: var(--tinta-suave);
+}
+
+@media (min-width: 760px) {
+  .pasos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

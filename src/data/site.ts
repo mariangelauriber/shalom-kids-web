@@ -61,14 +61,15 @@ export const site = {
   /** Enlace actual de la bio de Instagram; se usa mientras no haya número */
   whatsappRespaldo: 'https://wa.link/av0fwe',
   /**
-   * Mensaje prellenado único de admisiones (P20, 22 nov 2026): el llamado de la web es «Agenda una visita»
-   * y el mensaje conserva la palabra CUPO, la misma que piden los reels, los stickers y la pauta.
+   * Mensaje prellenado de admisiones (rediseño de conversión del 23 nov 2026, anexo «Header / Hero / Cierre»): lo usan la cabecera,
+   * la portada, el cierre, la barra móvil y los demás botones de admisión. Conserva la palabra «cupo» (ajuste 14),
+   * la misma que piden los reels, los stickers y la pauta. Sin «sin costo» (ajuste 7).
    */
-  whatsappMensaje: `Hola, quiero agendar una visita e información de CUPO ${anioMatricula} en Shalom Kids.`,
+  whatsappMensaje: `Hola Shalom Kids, quiero agendar una visita y conocer los costos y cupos ${anioMatricula}. Mi hijo tiene ___ años.`,
 
   instagram: 'https://www.instagram.com/shalomkids/',
   instagramUsuario: '@shalomkids',
-  /** Página oficial de Facebook (confirmada por el usuario, 18 nov 2026). Si el colegio cambia el nombre de usuario, se cambia solo aquí. */
+  /** Página oficial de Facebook (confirmada por el colegio, 18 nov 2026). Si el colegio cambia el nombre de usuario, se cambia solo aquí. */
   facebook: 'https://www.facebook.com/ShalomEstimulacionAprendizajeyDesarrolloArtistico',
   correo: 'shalom_kids@hotmail.com',
 
@@ -86,7 +87,7 @@ export const site = {
   mapaFicha: 'https://maps.app.goo.gl/fCgSAkWE611gXA1L9' as string | null,
 
   /**
-   * ¿Se muestra el vacacional? Escondido el 18 nov 2026 por pedido del usuario, hasta tener fechas y horario.
+   * ¿Se muestra el vacacional? Escondido el 18 nov 2026 por decisión del colegio, hasta tener fechas y horario.
    * En true vuelve la página /vacacionales/ y sus enlaces en la cabecera, el pie, el inicio, el sitemap y llms.txt.
    */
   mostrarVacacional: false,
@@ -103,6 +104,12 @@ export const site = {
      * no se compila ni se muestra, y la web no dice nada sobre la renovación (decisión del 22 nov 2026).
      */
     renovacionHasta: '2026-11-30T23:59:59-05:00',
+    /**
+     * Descuento de matrícula (dato de la FICHA, ajuste 9 del 23 nov 2026): el monto se informa por WhatsApp.
+     * Desde el 4 dic 2026 no se compila ni se muestra (misma técnica que la renovación), tampoco en el JSON-LD ni en llms.txt.
+     */
+    descuento: 'Pregunta por el descuento de matrícula, vigente hasta el 3 de diciembre de 2026.',
+    descuentoHasta: '2026-12-03T23:59:59-05:00',
   },
 
   /**
@@ -133,13 +140,13 @@ export const site = {
   ga4Id: null as string | null,
 
   legal: {
-    /** Razón social del responsable de los datos (dato del usuario, 22 nov 2026) */
+    /** Razón social del responsable de los datos (dato del colegio, 22 nov 2026) */
     razonSocial: 'Centro Educativo Shalom Kids' as string | null,
-    /** NIT (dato del usuario, 22 nov 2026) */
+    /** NIT (dato del colegio, 22 nov 2026) */
     nit: '900184090-1' as string | null,
-    /** Fecha desde la que rige el aviso (decisión del usuario, 22 nov 2026: texto estándar) */
+    /** Fecha desde la que rige el aviso (decisión del colegio, 22 nov 2026: texto estándar) */
     vigenteDesde: '22 de noviembre de 2026' as string | null,
-    /** Quién atiende consultas y reclamos de datos (decisión del usuario, 22 nov 2026: texto estándar) */
+    /** Quién atiende consultas y reclamos de datos (decisión del colegio, 22 nov 2026: texto estándar) */
     atiende: 'el área administrativa del colegio',
   },
 
@@ -195,15 +202,26 @@ export const site = {
 }
 
 /**
- * Mensajes propios de páginas concretas. Todos los botones de admisión usan site.whatsappMensaje;
- * solo /inclusion/ tiene el suyo (decisión del 22 nov 2026): sigue P20, conserva CUPO para contar los mensajes
- * y la palabra «inclusión» permite separarlos.
+ * Mensajes de WhatsApp por origen (rediseño de conversión del 23 nov 2026, anexo con los ajustes 7 y 14): sin «sin costo» y con la
+ * palabra «cupo» en los de admisión, para contar los mensajes sin cookies. Los botones de admisión sin mensaje propio
+ * usan site.whatsappMensaje.
  */
 export const mensajesWhatsApp = {
-  inclusion: `Hola, quiero agendar una visita para conversar sobre inclusión e información de CUPO ${anioMatricula} en Shalom Kids.`,
+  /** Sección de niveles: confirmar el grado con la fecha de nacimiento */
+  grados: `Hola, quiero confirmar qué grado le corresponde a mi hijo en ${anioMatricula}, ver horarios y consultar el cupo. Nació el ___.`,
+  /** Sección de inclusión del inicio y página /inclusion/ (la palabra «inclusión» permite separarlos) */
+  inclusion: `Hola Shalom Kids, vi su enfoque de inclusión sin diagnóstico previo. Quisiera agendar una visita para conversar sobre mi hijo de ___ años y su cupo ${anioMatricula}.`,
+  /** Solo se usa mientras la renovación esté vigente (hasta el 30 nov 2026) */
+  renovacion: `Hola, somos familia Shalom y queremos renovar la matrícula ${anioMatricula} de nuestro hijo ___ antes del 30 de noviembre.`,
 }
 
-/** Rótulo principal de los botones de admisión (P20, 22 nov 2026) */
+/** Pre-calificador (ajuste 13): arma el mensaje con el grado y la forma de empezar. No guarda ni envía nada a un servidor. */
+export function mensajePrecalificador(grado: string | null, opcion: string): string {
+  const para = grado ? `para ${grado}` : 'para mi hijo de ___ años'
+  return `Hola Shalom Kids, busco cupo ${anioMatricula} ${para}. Me gustaría ${opcion}. ¿Me comparten costos y horarios?`
+}
+
+/** Rótulo principal de los botones de admisión (P20 y ajuste 7 del 23 nov 2026) */
 export const rotuloVisita = 'Agenda una visita por WhatsApp'
 
 /** ¿Sigue vigente «El valor de este mes» en esa fecha? (hasta el final del día indicado, hora de Colombia) */
@@ -217,6 +235,11 @@ export function valorDelMesVigente(fecha: number = Date.now()): boolean {
 /** ¿Sigue abierta la renovación de matrícula en esa fecha? */
 export function renovacionVigente(fecha: number = Date.now()): boolean {
   return fecha <= Date.parse(site.matriculas.renovacionHasta)
+}
+
+/** ¿Sigue vigente el descuento de matrícula en esa fecha? (ajuste 9) */
+export function descuentoVigente(fecha: number = Date.now()): boolean {
+  return fecha <= Date.parse(site.matriculas.descuentoHasta)
 }
 
 export function urlWhatsApp(mensaje: string = site.whatsappMensaje): string {

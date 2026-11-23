@@ -59,6 +59,13 @@
   background: var(--menta);
 }
 
+/* Objetivo táctil mínimo de 44 px también en el menú de escritorio */
+.nav a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+
 .menu {
   margin-left: auto;
 }
@@ -120,4 +127,16 @@
   .menu {
     display: none;
   }
+}
+
+/* Ajuste 12: en el menú móvil, Nosotros, Blog y Privacidad van debajo y separados */
+.panel .secundarios {
+  margin-top: 0.35rem;
+  padding-top: 0.35rem;
+  border-top: 1px solid var(--borde);
+}
+
+.panel .secundarios a {
+  color: var(--tinta-suave);
+  font-size: 0.9rem;
 }

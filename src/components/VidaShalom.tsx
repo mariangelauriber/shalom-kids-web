@@ -96,12 +96,15 @@ interface Props {
   pagina?: 'inicio' | 'vacacionales'
   titulo?: ReactNode
   intro?: ReactNode
+  /** Texto del enlace a Instagram */
+  enlaceTexto?: string
 }
 
 export function VidaShalom({
   pagina = 'inicio',
   titulo = <>Momentos que compartimos con las <em>familias</em></>,
   intro = `Así vivimos la clausura, el Día de la Biblia y otras celebraciones. Puedes ver más en Instagram ${site.instagramUsuario}.`,
+  enlaceTexto = 'Ver más en Instagram',
 }: Props) {
   const posts = site.publicacionesInstagram.filter((p) => (p.pagina ?? 'inicio') === pagina)
 
@@ -123,7 +126,7 @@ export function VidaShalom({
                 <Publicacion key={p.url} p={p} i={i} />
               ))}
             </div>
-            <p className={s.nota}>Publicamos fotos y videos de los niños con la autorización de sus familias.</p>
+            <p className={s.nota}>Todas las fotos y videos de los niños se publican con autorización expresa de sus familias.</p>
           </>
         ) : (
           <p className={s.vacio}>
@@ -140,7 +143,7 @@ export function VidaShalom({
           onClick={() => registrar('instagram_click', { origen: `vida-shalom-${pagina}` })}
         >
           <IconoInstagram />
-          Ver más en Instagram
+          {enlaceTexto}
         </a>
       </div>
     </section>

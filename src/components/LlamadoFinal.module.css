@@ -25,3 +25,20 @@
     gap: 3rem;
   }
 }
+
+.accion {
+  display: grid;
+  gap: 0.6rem;
+  justify-items: start;
+}
+
+.micro {
+  max-width: 24rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* Foco visible sobre la banda morada: el contorno global es morado (1:1); tinta sobre morado ≈ 6:1 */
+.banda :focus-visible {
+  outline-color: var(--tinta);
+}

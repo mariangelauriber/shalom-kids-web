@@ -56,7 +56,7 @@ const papelFamilia = [
   'Vienes a las reuniones de seguimiento.',
 ]
 
-/** INC-8: se conserva tal cual (contenido del usuario, 22 nov 2026) */
+/** INC-8: se conserva tal cual (contenido del colegio, 22 nov 2026) */
 const temas = [
   {
     titulo: 'Aprendizaje y participación',

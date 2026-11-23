@@ -6,7 +6,7 @@ import { createHash } from 'node:crypto'
 import { existsSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { blogPosts } from '../src/data/blog.ts'
-import { renovacionVigente, site, urlWhatsApp } from '../src/data/site.ts'
+import { descuentoVigente, renovacionVigente, site, urlWhatsApp } from '../src/data/site.ts'
 
 const dist = join(import.meta.dirname, '..', 'dist')
 const rutas = [
@@ -82,13 +82,14 @@ ${site.publicarHorario ? `- Horario de atención: ${site.horarioAtencion.map((h)
 - Calendario: A (el año escolar empieza a finales de enero).
 - Matrículas ${site.matriculas.anio}: abiertas ${site.matriculas.cierre}.
 ${renovacionVigente() ? `- Renovación para familias del colegio: ${site.matriculas.renovacion}.
-` : ''}- Costos y documentos de matrícula: se informan en privado por WhatsApp; no se publican.
-- Matrícula: agendar una visita por WhatsApp; por ahí mismo se consulta el grado de ingreso y se pide el formulario de matrícula.
+` : ''}${descuentoVigente() ? `- Descuento de matrícula: vigente hasta el 3 de diciembre de 2026; el monto se informa por WhatsApp.
+` : ''}- Costos y documentos de matrícula: se envían por WhatsApp; no se publican.
+- Matrícula en 3 pasos: 1) escribir por WhatsApp para recibir los costos ${site.matriculas.anio} y los horarios y confirmar el cupo para la edad del niño; 2) visitar el colegio con el niño y conocer los salones y a las maestras; 3) reservar por WhatsApp, donde se envían el formulario y la lista de documentos. Primero se visita el colegio y después se decide.
 - Contacto: WhatsApp ${urlWhatsApp()} · Instagram ${site.instagram} · Facebook ${site.facebook} · Correo ${site.correo}
 
 ## Páginas
 
-- [Inicio](${base}/): dudas al elegir colegio, método, niveles y edad por grado, lo que vive el niño en el aula, proceso de matrícula, inclusión, familias, preguntas frecuentes y ubicación.
+- [Inicio](${base}/): así es el ingreso en Shalom, método y formación espiritual, niveles con los logros de cada grado y la edad de ingreso, inclusión en 3 pasos, familias, matrícula ${site.matriculas.anio} con un pre-calificador por WhatsApp, preguntas frecuentes y ubicación.
 - [Nosotros](${base}/nosotros/): historia, significado de Shalom, misión, visión 2030 y valores.
 - [Inclusión](${base}/inclusion/): cómo acompaña el colegio a los niños que necesitan apoyos (visita, entrevista, apoyos acordados con la familia y seguimiento en reuniones periódicas) y preguntas frecuentes.
 - [Blog para familias](${base}/blog/): guías prácticas sobre el inicio escolar, la elección del colegio y el juego en casa.
@@ -172,11 +173,30 @@ const faltan = Object.entries({
 
 console.log('\n✓ robots.txt, llms.txt' + (site.url ? ', sitemap.xml' : '') + ` y _headers (${huellas.size} huellas) generados en dist/`)
 if (faltan.length) console.log(`⚠ Datos pendientes en src/data/site.ts: ${faltan.join(', ')}`)
+// llms.txt y el HTML prerenderizado son estáticos: la renovación (hasta el 30 nov) y el descuento (hasta el 3 dic)
+// solo desaparecen de ellos al recompilar y volver a publicar el 1 dic y el 4 dic de 2026
+if (renovacionVigente() || descuentoVigente())
+  console.log(
+    '⚠ Esta compilación incluye ' +
+      [renovacionVigente() && 'la renovación (hasta el 30 nov)', descuentoVigente() && 'el descuento (hasta el 3 dic)']
+        .filter(Boolean)
+        .join(' y ') +
+      ' en llms.txt y el HTML estático: recompilar y volver a publicar el 1 dic y el 4 dic de 2026.',
+  )
 console.log('  Lista completa: npm run pendientes\n')
 
 // Vista de revisión en una subcarpeta (p. ej. GitHub Pages, BASE_PATH=/shalom-kids-web/):
 // los enlaces internos y las imágenes de public/ están escritos desde la raíz, así que se les añade el prefijo.
+// Desde Git Bash, MSYS convierte «/shalom-kids-web/» en «C:/Program Files/Git/shalom-kids-web/»: se detiene la
+// compilación en vez de dejar una web rota (compilar desde PowerShell o con MSYS_NO_PATHCONV=1)
 const basePath = process.env.BASE_PATH
+if (basePath && (!basePath.startsWith('/') || basePath.includes(':'))) {
+  console.error(
+    `✗ BASE_PATH no válido: «${basePath}». Debe empezar por «/» (p. ej. /shalom-kids-web/). ` +
+      'En Git Bash: MSYS_NO_PATHCONV=1 BASE_PATH=/shalom-kids-web/ npm run build',
+  )
+  process.exit(1)
+}
 if (basePath && basePath !== '/') {
   const pre = basePath.replace(/\/$/, '')
   const rutas = '(?:img/|blog/|nosotros/|inclusion/|privacidad/|vacacionales/|#|favicon|apple-touch|icon-|site\\.webmanifest)'

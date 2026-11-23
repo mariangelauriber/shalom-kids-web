@@ -337,6 +337,7 @@
   padding-block: 3rem;
   background: var(--turquesa-noche);
   color: #fff;
+  --foco: #fff;
 }
 
 @media (min-width: 760px) {

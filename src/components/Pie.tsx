@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom'
 import { mensajesWhatsApp, site, telefonoLegible } from '../data/site'
-import { enlaces } from './Cabecera'
+import { enlaces, enlacesSecundarios } from './Cabecera'
 import { EnlaceWhatsApp } from './EnlaceWhatsApp'
 import { IconoFacebook, IconoInstagram, IconoWhatsApp } from './Iconos'
 import s from './Pie.module.css'
@@ -20,9 +20,10 @@ export function Pie() {
           <div>
             {/* Espacios duros: «· Soledad» no queda sola en una línea */}
             <p className={s.nombre}>{site.nombreCompleto.replace(' · ', ' · ')}</p>
+            {/* Pie SEO local (rediseño de conversión, sección 9) */}
             <p>
-              Colegio cristiano privado en {d.barrio}, {d.municipio} ({d.departamento}). Preescolar y primaria, desde
-              los 2 años hasta 3.º de primaria.
+              Preescolar (párvulos a transición) y primaria (1.º a 3.º). Enfoque cristiano e inclusión escolar. Colegio
+              privado en el barrio {d.barrio}, {d.municipio} ({d.departamento}).
             </p>
             <p className={s.lema}>«{site.lema}»</p>
             <ul className={s.redes} aria-label="Redes sociales">
@@ -61,7 +62,7 @@ export function Pie() {
             Secciones
           </h2>
           <ul>
-            {enlaces.map((e) => (
+            {[...enlaces, ...enlacesSecundarios].map((e) => (
               <li key={e.href}>
                 <a href={e.href}>{e.texto}</a>
               </li>
@@ -78,10 +79,15 @@ export function Pie() {
               </EnlaceWhatsApp>
             </li>
             <li>
+              <a href={site.instagram} target="_blank" rel="noopener">
+                Instagram {site.instagramUsuario}
+              </a>
+            </li>
+            <li>
               <a href={`mailto:${site.correo}`}>{site.correo}</a>
             </li>
             <li className={s.direccion}>
-              {d.calle}, {d.barrio}, {d.municipio}
+              {d.calle}, Barrio {d.barrio}, {d.municipio}, {d.departamento}
             </li>
             {site.mapaFicha && (
               <li>
